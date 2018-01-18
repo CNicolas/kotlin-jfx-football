@@ -6,7 +6,7 @@ import org.testng.annotations.Test
 import kotlin.system.measureNanoTime
 
 class CalculationTest {
-    val tries = 1000
+    private val tries = 1000
 
     @Test
     fun getMaxCoordinates_should_give_coordinates_close_at_1percent_of_max_distance_STRAIGHT() {

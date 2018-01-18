@@ -1,6 +1,5 @@
-package football.helpers
+package helpers
 
-import helpers.*
 import org.assertj.core.api.Assertions
 import org.testng.annotations.Test
 

@@ -7,10 +7,10 @@ fun distance(from: Coordinates, to: Coordinates): Double {
 }
 
 fun extractFunctionOfLine(from: Coordinates, to: Coordinates): (Double) -> Double {
-    val coef = (from.y - to.y) / (from.x - to.x)
-    val originOrdinate = from.y - (coef * from.x)
+    val coefficient = (from.y - to.y) / (from.x - to.x)
+    val originOrdinate = from.y - (coefficient * from.x)
 
-    return { x -> coef * x + originOrdinate }
+    return { x -> coefficient * x + originOrdinate }
 }
 
 fun factorial(n: Int): BigInteger = if (n <= 1) BigInteger.ONE else factorial(n - 1) * BigInteger.valueOf(n.toLong())

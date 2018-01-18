@@ -10,8 +10,8 @@ import java.util.*
 class GameRunnerTest {
     @Test
     fun should_play_twice_exactly_the_same_game() {
-        val team1 = TeamHelpers.FixedGoalKeeper_DumbRusherRunWithBallUP(Color.BLUE, GameSide.HOME)
-        val team2 = TeamHelpers.DoesNothingUP_DoesNothingDOWN(Color.RED, GameSide.AWAY)
+        val team1 = TeamHelpers.createFixedGoalKeeperDumbRusherRunWithBallUP(Color.BLUE, GameSide.HOME)
+        val team2 = TeamHelpers.createDoesNothingUPDoesNothingDOWN(Color.RED, GameSide.AWAY)
 
         val runner = GameRunner(team1, team2)
         runner.play()
@@ -27,8 +27,8 @@ class GameRunnerTest {
 
     @Test
     fun full_DumbRusherRunWithBall_on_each_side() {
-        val team1 = TeamHelpers.DumbRusherRunUP_DumbRusherRunDOWN(Color.BLUE, GameSide.HOME)
-        val team2 = TeamHelpers.DumbRusherRunUP_DumbRusherRunDOWN(Color.RED, GameSide.AWAY)
+        val team1 = TeamHelpers.createDumbRusherRunUPDumbRusherRunDOWN(Color.BLUE, GameSide.HOME)
+        val team2 = TeamHelpers.createDumbRusherRunUPDumbRusherRunDOWN(Color.RED, GameSide.AWAY)
 
         val runner = GameRunner(team1, team2)
         runner.play()
@@ -39,8 +39,8 @@ class GameRunnerTest {
 
     @Test
     fun team_away_should_win() {
-        val team1 = TeamHelpers.DoesNothingUP_DoesNothingDOWN(Color.BLUE, GameSide.HOME)
-        val team2 = TeamHelpers.DumbRusherRunUP_DumbRusherRunDOWN(Color.RED, GameSide.AWAY)
+        val team1 = TeamHelpers.createDoesNothingUPDoesNothingDOWN(Color.BLUE, GameSide.HOME)
+        val team2 = TeamHelpers.createDumbRusherRunUPDumbRusherRunDOWN(Color.RED, GameSide.AWAY)
 
         val runner = GameRunner(team1, team2)
         runner.play()

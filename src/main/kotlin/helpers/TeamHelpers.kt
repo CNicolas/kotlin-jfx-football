@@ -99,23 +99,23 @@ class TeamHelpers private constructor() {
                     }
                 }
 
-        // region Premade Teams
+        // region Pre-made Teams
 
-        fun DoesNothingUP_DoesNothingDOWN(color: Color, side: GameSide): Team {
+        fun createDoesNothingUPDoesNothingDOWN(color: Color, side: GameSide): Team {
             val team = Team(color, listOf(DoesNothing(UP), DoesNothing(DOWN)))
             team.gameSide = side
 
             return team
         }
 
-        fun FixedGoalKeeper_DumbRusherRunWithBallUP(color: Color, side: GameSide): Team {
+        fun createFixedGoalKeeperDumbRusherRunWithBallUP(color: Color, side: GameSide): Team {
             val team = Team(color, listOf(FixedGoalKeeper(), DumbRusherRun(UP)))
             team.gameSide = side
 
             return team
         }
 
-        fun DumbRusherRunUP_DumbRusherRunDOWN(color: Color, side: GameSide): Team {
+        fun createDumbRusherRunUPDumbRusherRunDOWN(color: Color, side: GameSide): Team {
             val team = Team(color, listOf(DumbRusherRun(UP), DumbRusherRun(DOWN)))
             team.gameSide = side
 

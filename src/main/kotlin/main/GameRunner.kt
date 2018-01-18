@@ -107,15 +107,15 @@ class GameRunner(private val home: Team,
     private fun makeMapBetweenPlayerAndNumber(): Map<Int, Player?> {
         val playersByNumber = HashMap<Int, Player?>()
 
-        playersByNumber.put(0, home.player1)
-        playersByNumber.put(1, home.player2)
-        playersByNumber.put(2, home.player3)
-        playersByNumber.put(3, home.player4)
+        playersByNumber[0] = home.player1
+        playersByNumber[1] = home.player2
+        playersByNumber[2] = home.player3
+        playersByNumber[3] = home.player4
 
-        playersByNumber.put(4, away.player1)
-        playersByNumber.put(5, away.player2)
-        playersByNumber.put(6, away.player3)
-        playersByNumber.put(7, away.player4)
+        playersByNumber[4] = away.player1
+        playersByNumber[5] = away.player2
+        playersByNumber[6] = away.player3
+        playersByNumber[7] = away.player4
 
         return playersByNumber
     }
