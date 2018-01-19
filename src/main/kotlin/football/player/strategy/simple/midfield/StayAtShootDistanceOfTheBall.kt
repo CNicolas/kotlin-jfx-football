@@ -10,7 +10,7 @@ import football.player.strategy.DefenderStrategy
 import helpers.Coordinates
 import helpers.getMaxCoordinates
 
-class StayAtShootDistanceOfTheBall : DefenderStrategy() {
+class StayAtShootDistanceOfTheBall(distanceFromGoal: Double = FieldContext.fieldTotalWidth / 4) : DefenderStrategy(distanceFromGoal) {
     override val side: SideInTeam = SideInTeam.CENTER
 
     override fun moveWithoutBall(player: Player): Coordinates {

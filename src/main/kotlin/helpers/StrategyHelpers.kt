@@ -1,10 +1,12 @@
 package helpers
 
 import football.player.SideInTeam
+import football.player.SideInTeam.*
 import football.player.strategy.PlayerStrategy
 import football.player.strategy.combined.attack.RunStraightAndCrossShot
 import football.player.strategy.combined.attack.ZigZagAndCrossShot
 import football.player.strategy.combined.midfield.RecoverAndShoot
+import football.player.strategy.combined.multi.FollowRecoverCrossShot
 import football.player.strategy.simple.DoesNothing
 import football.player.strategy.simple.attack.camper.FollowBallHorizontally
 import football.player.strategy.simple.attack.dumbRushers.DumbRusherNormal
@@ -21,8 +23,8 @@ import football.player.strategy.simple.defense.FollowClearBall
 import football.player.strategy.simple.midfield.StayAtShootDistanceOfTheBall
 import java.util.*
 
-const val NUMBER_OF_STRATEGIES = 35
-const val NUMBER_OF_RANDOM_SIDE_STRATEGIES = 16
+const val NUMBER_OF_STRATEGIES = 38
+const val NUMBER_OF_RANDOM_SIDE_STRATEGIES = 17
 
 fun createStrategyByNumber(strategyNumber: Int): PlayerStrategy {
     val randomSideInTeam = SideInTeam.values()[Random().nextInt(SideInTeam.values().size)]
@@ -30,39 +32,42 @@ fun createStrategyByNumber(strategyNumber: Int): PlayerStrategy {
     return when (strategyNumber) {
         0 -> FixedGoalKeeper()
         1 -> DefenderFollowingBall()
-        2 -> RunAndShootStraight(SideInTeam.UP)
-        3 -> RunAndShootStraight(SideInTeam.CENTER)
-        4 -> RunAndShootStraight(SideInTeam.DOWN)
-        5 -> PushBallAndShootStraight(SideInTeam.UP)
-        6 -> PushBallAndShootStraight(SideInTeam.CENTER)
-        7 -> PushBallAndShootStraight(SideInTeam.DOWN)
-        8 -> DumbRusherRun(SideInTeam.UP)
-        9 -> DumbRusherRun(SideInTeam.CENTER)
-        10 -> DumbRusherRun(SideInTeam.DOWN)
-        11 -> DumbRusherNormal(SideInTeam.UP)
-        12 -> DumbRusherNormal(SideInTeam.CENTER)
-        13 -> DumbRusherNormal(SideInTeam.DOWN)
-        14 -> DumbRusherShoot(SideInTeam.UP)
-        15 -> DumbRusherShoot(SideInTeam.CENTER)
-        16 -> DumbRusherShoot(SideInTeam.DOWN)
-        17 -> CrossShot(SideInTeam.UP)
-        18 -> CrossShot(SideInTeam.CENTER)
-        19 -> CrossShot(SideInTeam.DOWN)
-        20 -> RunZigZag(SideInTeam.UP)
-        21 -> RunZigZag(SideInTeam.CENTER)
-        22 -> RunZigZag(SideInTeam.DOWN)
+        2 -> RunAndShootStraight(UP)
+        3 -> RunAndShootStraight(CENTER)
+        4 -> RunAndShootStraight(DOWN)
+        5 -> PushBallAndShootStraight(UP)
+        6 -> PushBallAndShootStraight(CENTER)
+        7 -> PushBallAndShootStraight(DOWN)
+        8 -> DumbRusherRun(UP)
+        9 -> DumbRusherRun(CENTER)
+        10 -> DumbRusherRun(DOWN)
+        11 -> DumbRusherNormal(UP)
+        12 -> DumbRusherNormal(CENTER)
+        13 -> DumbRusherNormal(DOWN)
+        14 -> DumbRusherShoot(UP)
+        15 -> DumbRusherShoot(CENTER)
+        16 -> DumbRusherShoot(DOWN)
+        17 -> CrossShot(UP)
+        18 -> CrossShot(CENTER)
+        19 -> CrossShot(DOWN)
+        20 -> RunZigZag(UP)
+        21 -> RunZigZag(CENTER)
+        22 -> RunZigZag(DOWN)
         23 -> StayAtShootDistanceOfTheBall()
-        24 -> RunStraightAndCrossShot(SideInTeam.UP)
-        25 -> RunStraightAndCrossShot(SideInTeam.CENTER)
-        26 -> RunStraightAndCrossShot(SideInTeam.DOWN)
-        27 -> ZigZagAndCrossShot(SideInTeam.UP)
-        28 -> ZigZagAndCrossShot(SideInTeam.CENTER)
-        29 -> ZigZagAndCrossShot(SideInTeam.DOWN)
-        30 -> Overtake(SideInTeam.UP)
-        31 -> Overtake(SideInTeam.DOWN)
+        24 -> RunStraightAndCrossShot(UP)
+        25 -> RunStraightAndCrossShot(CENTER)
+        26 -> RunStraightAndCrossShot(DOWN)
+        27 -> ZigZagAndCrossShot(UP)
+        28 -> ZigZagAndCrossShot(CENTER)
+        29 -> ZigZagAndCrossShot(DOWN)
+        30 -> Overtake(UP)
+        31 -> Overtake(DOWN)
         32 -> FollowBallHorizontally()
         33 -> FollowClearBall()
         34 -> RecoverAndShoot()
+        35 -> FollowRecoverCrossShot(UP)
+        36 -> FollowRecoverCrossShot(CENTER)
+        37 -> FollowRecoverCrossShot(DOWN)
 
         else -> {
             DoesNothing(randomSideInTeam)
@@ -90,6 +95,7 @@ fun createStrategyByNumberAndRandomSide(strategyNumber: Int): PlayerStrategy {
         13 -> FollowBallHorizontally()
         14 -> FollowClearBall()
         15 -> RecoverAndShoot()
+        16 -> FollowRecoverCrossShot(randomSideInTeam)
 
         else -> {
             DoesNothing(randomSideInTeam)

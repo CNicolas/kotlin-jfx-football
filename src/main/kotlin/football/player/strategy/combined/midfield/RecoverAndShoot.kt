@@ -1,6 +1,7 @@
 package football.player.strategy.combined.midfield
 
 import football.Ball
+import football.FieldContext
 import football.player.Player
 import football.player.ShootingStrength
 import football.player.SideInTeam
@@ -11,7 +12,7 @@ import football.player.strategy.simple.defense.FollowClearBall
 import helpers.Coordinates
 import helpers.distance
 
-class RecoverAndShoot : DefenderStrategy(), CombinedRunShootStrategy {
+class RecoverAndShoot(distanceFromGoal: Double = FieldContext.fieldTotalWidth / 5) : DefenderStrategy(distanceFromGoal), CombinedRunShootStrategy {
     override val side: SideInTeam = SideInTeam.CENTER
 
     override val runningStrategy: FollowClearBall = FollowClearBall()
