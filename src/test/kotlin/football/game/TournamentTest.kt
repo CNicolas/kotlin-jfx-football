@@ -72,7 +72,7 @@ class TournamentTest {
         println("${leaderBoard.getWinner().team.strategies}")
     }
 
-    @Test
+    @Test(enabled = false)
     fun should_play_tournament_with_100_teams_of_2_players() {
         val tournament = Tournament()
         val teams = TeamHelpers.createTeamsOfTwoPlayers()
@@ -87,7 +87,7 @@ class TournamentTest {
         println("${leaderBoard.getWinner().team.strategies}")
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     fun should_play_tournament_with_300_teams_of_4_players() {
         val tournament = Tournament()
         val teams = TeamHelpers.createTeamsOfFourPlayersOnRandomSide()

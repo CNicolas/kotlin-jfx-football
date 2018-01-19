@@ -5,7 +5,7 @@ import football.FieldContext
 import football.game.GameSide
 import football.game.Team
 import football.player.SideInTeam.DOWN
-import football.player.strategy.simple.attack.camper.CamperInOpponentSurface
+import football.player.strategy.simple.attack.camper.CampInOpponentSurface
 import football.player.strategy.simple.attack.dumbRushers.DumbRusherShoot
 import football.player.strategy.simple.defense.DefenderFollowingBall
 import football.player.strategy.simple.defense.FollowCrossClearBall
@@ -63,7 +63,7 @@ class FootballApp : Application() {
     }
 
     private fun createTeams(): Pair<Team, Team> {
-        val home = Team(Color.BLUE, listOf(CamperInOpponentSurface(), FollowCrossClearBall()))
+        val home = Team(Color.BLUE, listOf(CampInOpponentSurface(), FollowCrossClearBall()))
         home.gameSide = GameSide.HOME
         val away = Team(Color.RED, listOf(DefenderFollowingBall(), DumbRusherShoot(DOWN)))
         away.gameSide = GameSide.AWAY

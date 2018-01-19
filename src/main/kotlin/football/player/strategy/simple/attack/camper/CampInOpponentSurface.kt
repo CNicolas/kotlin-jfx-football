@@ -9,7 +9,7 @@ import football.player.SideInTeam
 import football.player.strategy.AttackStrategy
 import helpers.Coordinates
 
-class CamperInOpponentSurface : AttackStrategy() {
+class CampInOpponentSurface : AttackStrategy() {
     override val side: SideInTeam = SideInTeam.CENTER
 
     override fun moveWithoutBall(player: Player): Coordinates {
