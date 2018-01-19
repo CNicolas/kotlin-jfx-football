@@ -18,7 +18,7 @@ import kotlin.collections.HashMap
 
 class GameRunner(private val home: Team,
                  private val away: Team,
-                 private val turns: Int = 200,
+                 private val turns: Int = 1000,
                  private val score: Int = 3) {
     val states: MutableList<State> = mutableListOf()
 

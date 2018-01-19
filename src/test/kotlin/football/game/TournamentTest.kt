@@ -73,11 +73,11 @@ class TournamentTest {
     }
 
     @Test(enabled = false)
-    fun should_play_tournament_with_100_teams_of_2_players() {
+    fun should_play_tournament_with_50_teams_of_2_players() {
         val tournament = Tournament()
         val teams = TeamHelpers.createTeamsOfTwoPlayers()
         Collections.shuffle(teams)
-        val tournamentTeams = teams.subList(0, 100)
+        val tournamentTeams = teams.subList(0, 50)
 
         val leaderBoard = tournament.playTournament(tournamentTeams)
 

@@ -20,9 +20,9 @@ class FieldContext {
         const val cageHeight: Double = 50.0
         const val cageWidth: Double = cageHeight / 2
 
-        const val movingSpeed = 500.0
-        const val shootingDistance = 50.0
-        const val moveDistanceByTurn = 50.0
+        const val movingSpeed = 600.0
+        const val shootingDistance = 15.0
+        const val moveDistanceByTurn = 15.0
         const val maxDistanceToTouch = 5
 
         val grassColor = Color.FORESTGREEN!!
