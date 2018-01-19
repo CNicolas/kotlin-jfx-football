@@ -8,22 +8,22 @@ import javafx.scene.shape.Rectangle
 
 class FieldContext {
     companion object {
-        val fieldTotalWidth: Double = 500.0
-        val fieldHalfWidth: Double = fieldTotalWidth / 2
+        const val fieldTotalWidth: Double = 500.0
+        const val fieldHalfWidth: Double = fieldTotalWidth / 2
 
-        val fieldTotalHeight: Double = 300.0
-        val fieldHalfHeight: Double = fieldTotalHeight / 2
+        const val fieldTotalHeight: Double = 300.0
+        const val fieldHalfHeight: Double = fieldTotalHeight / 2
 
-        val surfaceHeight: Double = 150.0
-        val surfaceWidth: Double = surfaceHeight / 2
+        const val surfaceHeight: Double = 150.0
+        const val surfaceWidth: Double = surfaceHeight / 2
 
-        val cageHeight: Double = 50.0
-        val cageWidth: Double = cageHeight / 2
+        const val cageHeight: Double = 50.0
+        const val cageWidth: Double = cageHeight / 2
 
-        val movingSpeed = 200.0
-        val shootingDistance = 50.0
-        val moveDistanceByTurn = 50.0
-        val maxDistanceToTouch = 5
+        const val movingSpeed = 500.0
+        const val shootingDistance = 50.0
+        const val moveDistanceByTurn = 50.0
+        const val maxDistanceToTouch = 5
 
         val grassColor = Color.FORESTGREEN!!
         private val linesColor = Color.WHITE!!
