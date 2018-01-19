@@ -25,7 +25,7 @@ class Ball private constructor() {
 
     fun clone(): Ball {
         val ball = Ball()
-        ball.position = position.clone()
+        ball.position = position.copy()
         ball.circle = circle
 
         return ball

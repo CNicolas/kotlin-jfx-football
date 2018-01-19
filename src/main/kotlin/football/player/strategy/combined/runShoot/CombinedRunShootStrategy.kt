@@ -1,4 +1,4 @@
-package football.player.strategy.combined
+package football.player.strategy.combined.runShoot
 
 import football.player.strategy.PlayerStrategy
 

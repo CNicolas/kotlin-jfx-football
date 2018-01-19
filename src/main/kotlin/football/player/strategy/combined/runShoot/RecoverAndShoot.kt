@@ -1,16 +1,12 @@
-package football.player.strategy.combined.midfield
+package football.player.strategy.combined.runShoot
 
 import football.Ball
 import football.FieldContext
 import football.player.Player
-import football.player.ShootingStrength
 import football.player.SideInTeam
 import football.player.strategy.DefenderStrategy
-import football.player.strategy.combined.CombinedRunShootStrategy
-import football.player.strategy.combined.attack.ZigZagAndCrossShot
 import football.player.strategy.simple.defense.FollowClearBall
 import helpers.Coordinates
-import helpers.distance
 
 class RecoverAndShoot(distanceFromGoal: Double = FieldContext.fieldTotalWidth / 5) : DefenderStrategy(distanceFromGoal), CombinedRunShootStrategy {
     override val side: SideInTeam = SideInTeam.CENTER
@@ -20,7 +16,7 @@ class RecoverAndShoot(distanceFromGoal: Double = FieldContext.fieldTotalWidth / 
 
     override fun moveWithoutBall(player: Player): Coordinates {
         return when {
-            isBallAtShootingDistance(player) -> shootingStrategy.moveWithoutBall(player)
+            isAtShootingDistance(player, Ball.instance.position) -> shootingStrategy.moveWithoutBall(player)
             else -> runningStrategy.moveWithoutBall(player)
         }
     }
@@ -31,7 +27,4 @@ class RecoverAndShoot(distanceFromGoal: Double = FieldContext.fieldTotalWidth / 
             else -> shootingStrategy.shoot(player)
         }
     }
-
-    private fun isBallAtShootingDistance(player: Player): Boolean =
-            ShootingStrength.SHOOT.distance > distance(Ball.instance.position, player.position)
 }

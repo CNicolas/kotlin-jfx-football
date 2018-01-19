@@ -16,9 +16,12 @@ class Overtake(override val side: SideInTeam) : AttackStrategy() {
 
     override fun shoot(player: Player): Coordinates {
         return when {
-            isInOpponentSurface(player) -> shootTowards(player.position, getOpponentGoalsCenter(player), ShootingStrength.SHOOT)
-            isInLastQuarterOfField(player) -> shootTowards(player.position, getOpponentGoalsCenter(player), ShootingStrength.NORMAL)
-            isInCorridor(player) -> shootTowards(player.position, continueOnCorridor(player), ShootingStrength.NORMAL)
+            isInOpponentSurface(player) ->
+                shootTowards(player.position, getOpponentGoalsCenter(player.gameSide), ShootingStrength.SHOOT)
+            isInLastQuarterOfField(player.team.gameSide, player.position) ->
+                shootTowards(player.position, getOpponentGoalsCenter(player.gameSide), ShootingStrength.NORMAL)
+            isInCorridor(player) ->
+                shootTowards(player.position, continueOnCorridor(player), ShootingStrength.NORMAL)
             else -> shootTowards(player.position, corridorClosestLocation(player), ShootingStrength.NORMAL)
         }
     }

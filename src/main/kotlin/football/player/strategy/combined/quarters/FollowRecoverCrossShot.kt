@@ -1,4 +1,4 @@
-package football.player.strategy.combined.multi
+package football.player.strategy.combined.quarters
 
 import football.player.SideInTeam
 import football.player.strategy.PlayerStrategy

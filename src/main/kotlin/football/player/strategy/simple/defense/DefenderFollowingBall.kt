@@ -8,7 +8,7 @@ import football.player.SideInTeam
 import football.player.strategy.DefenderStrategy
 import helpers.Coordinates
 
-class DefenderFollowingBall(distanceFromGoal: Double = FieldContext.surfaceWidth / 5) : DefenderStrategy(distanceFromGoal) {
+class DefenderFollowingBall(distanceFromGoal: Double = FieldContext.fieldTotalWidth / 5) : DefenderStrategy(distanceFromGoal) {
     override val side: SideInTeam = SideInTeam.CENTER
 
     override fun moveWithoutBall(player: Player): Coordinates {
@@ -18,7 +18,7 @@ class DefenderFollowingBall(distanceFromGoal: Double = FieldContext.surfaceWidth
     }
 
     override fun shoot(player: Player): Coordinates {
-        val destination = getOpponentGoalsCenter(player)
+        val destination = getOpponentGoalsCenter(player.gameSide)
 
         return shootTowards(player.position, destination, ShootingStrength.CLEARANCE)
     }

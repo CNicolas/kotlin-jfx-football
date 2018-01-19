@@ -3,10 +3,11 @@ package helpers
 import football.player.SideInTeam
 import football.player.SideInTeam.*
 import football.player.strategy.PlayerStrategy
-import football.player.strategy.combined.attack.RunStraightAndCrossShot
-import football.player.strategy.combined.attack.ZigZagAndCrossShot
-import football.player.strategy.combined.midfield.RecoverAndShoot
-import football.player.strategy.combined.multi.FollowRecoverCrossShot
+import football.player.strategy.combined.runShoot.RunStraightAndCrossShot
+import football.player.strategy.combined.runShoot.ZigZagAndCrossShot
+import football.player.strategy.combined.runShoot.RecoverAndShoot
+import football.player.strategy.combined.quarters.FollowRecoverCrossShot
+import football.player.strategy.combined.quarters.RecoverCrossShot
 import football.player.strategy.simple.DoesNothing
 import football.player.strategy.simple.attack.camper.FollowBallHorizontally
 import football.player.strategy.simple.attack.dumbRushers.DumbRusherNormal
@@ -20,11 +21,12 @@ import football.player.strategy.simple.attack.runAndShoot.shootStraight.RunAndSh
 import football.player.strategy.simple.defense.DefenderFollowingBall
 import football.player.strategy.simple.defense.FixedGoalKeeper
 import football.player.strategy.simple.defense.FollowClearBall
+import football.player.strategy.simple.defense.FollowCrossClearBall
 import football.player.strategy.simple.midfield.StayAtShootDistanceOfTheBall
 import java.util.*
 
-const val NUMBER_OF_STRATEGIES = 38
-const val NUMBER_OF_RANDOM_SIDE_STRATEGIES = 17
+const val NUMBER_OF_STRATEGIES = 42
+const val NUMBER_OF_RANDOM_SIDE_STRATEGIES = 19
 
 fun createStrategyByNumber(strategyNumber: Int): PlayerStrategy {
     val randomSideInTeam = SideInTeam.values()[Random().nextInt(SideInTeam.values().size)]
@@ -68,6 +70,10 @@ fun createStrategyByNumber(strategyNumber: Int): PlayerStrategy {
         35 -> FollowRecoverCrossShot(UP)
         36 -> FollowRecoverCrossShot(CENTER)
         37 -> FollowRecoverCrossShot(DOWN)
+        38 -> RecoverCrossShot(UP)
+        39 -> RecoverCrossShot(CENTER)
+        40 -> RecoverCrossShot(DOWN)
+        41 -> FollowCrossClearBall()
 
         else -> {
             DoesNothing(randomSideInTeam)
@@ -96,6 +102,8 @@ fun createStrategyByNumberAndRandomSide(strategyNumber: Int): PlayerStrategy {
         14 -> FollowClearBall()
         15 -> RecoverAndShoot()
         16 -> FollowRecoverCrossShot(randomSideInTeam)
+        17 -> RecoverCrossShot(randomSideInTeam)
+        18 -> FollowCrossClearBall()
 
         else -> {
             DoesNothing(randomSideInTeam)

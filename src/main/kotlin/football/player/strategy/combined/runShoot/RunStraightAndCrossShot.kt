@@ -1,9 +1,9 @@
-package football.player.strategy.combined.attack
+package football.player.strategy.combined.runShoot
 
 import football.player.Player
 import football.player.SideInTeam
 import football.player.strategy.AttackStrategy
-import football.player.strategy.combined.CombinedRunShootStrategy
+import football.player.strategy.combined.runShoot.CombinedRunShootStrategy
 import football.player.strategy.simple.attack.dumbRushers.DumbRusherRun
 import football.player.strategy.simple.attack.runAndShoot.cross.CrossShot
 import helpers.Coordinates

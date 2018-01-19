@@ -1,5 +1,6 @@
 package football.player
 
+import football.game.GameSide
 import football.game.Team
 import football.player.strategy.PlayerStrategy
 import helpers.Coordinates
@@ -8,6 +9,8 @@ import javafx.scene.shape.Circle
 class Player(val team: Team, val strategy: PlayerStrategy) {
     var circle: Circle = Circle(0.0, 0.0, 7.0, team.color)
     var position: Coordinates = Coordinates()
+    val gameSide: GameSide
+        get() = team.gameSide
 
     fun setInitialPosition(initialPosition: Coordinates) {
         position = initialPosition
@@ -22,7 +25,7 @@ class Player(val team: Team, val strategy: PlayerStrategy) {
 
     fun clone(): Player {
         val player = Player(team, strategy)
-        player.position = position.clone()
+        player.position = position.copy()
         player.circle = circle
 
         return player

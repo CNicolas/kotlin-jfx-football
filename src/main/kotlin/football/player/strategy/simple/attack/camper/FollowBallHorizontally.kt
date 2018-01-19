@@ -21,5 +21,5 @@ class FollowBallHorizontally : AttackStrategy() {
         }
     }
 
-    override fun shoot(player: Player): Coordinates = shootTowards(player.position, getOpponentGoalsCenter(player), ShootingStrength.SHOOT)
+    override fun shoot(player: Player): Coordinates = shootTowards(player.position, getOpponentGoalsCenter(player.gameSide), ShootingStrength.SHOOT)
 }

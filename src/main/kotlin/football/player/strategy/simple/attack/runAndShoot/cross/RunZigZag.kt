@@ -24,7 +24,7 @@ class RunZigZag(override val side: SideInTeam) : AttackStrategy() {
     }
 
     override fun shoot(player: Player): Coordinates {
-        val opponentsGoalCenter = getOpponentGoalsCenter(player)
+        val opponentsGoalCenter = getOpponentGoalsCenter(player.gameSide)
 
         val destinationY = when (isInOpponentSurface(player)) {
             true -> when (direction) {

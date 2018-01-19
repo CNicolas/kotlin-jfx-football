@@ -11,6 +11,7 @@ import football.player.Player
 import football.player.ShootingStrength
 import football.player.SideInTeam
 import helpers.Coordinates
+import helpers.distance
 import helpers.extractFunctionOfLine
 import helpers.getMaxCoordinates
 
@@ -36,20 +37,6 @@ abstract class AbstractPlayerStrategy : PlayerStrategy {
         return getMaxCoordinates(from, Coordinates(trueX, trueY), strength.distance)
     }
 
-    protected fun getOpponentGoalsCenter(player: Player): Coordinates {
-        return when (player.team.gameSide) {
-            HOME -> getGoalCenter(AWAY)
-            else -> getGoalCenter(HOME)
-        }
-    }
-
-    protected fun getGoalCenter(gameSide: GameSide): Coordinates {
-        return when (gameSide) {
-            HOME -> Coordinates(0.0, fieldHalfHeight)
-            else -> Coordinates(fieldTotalWidth, fieldHalfHeight)
-        }
-    }
-
     override fun setInitialPosition(gameSide: GameSide): Coordinates {
         val x = setInitialX(gameSide)
         val y = setInitialY()
@@ -59,10 +46,33 @@ abstract class AbstractPlayerStrategy : PlayerStrategy {
         return initialPosition
     }
 
-    protected fun isInTeamHalfField(teamSide: GameSide, coordinates: Coordinates): Boolean {
+    protected fun getOpponentGoalsCenter(gameSide: GameSide): Coordinates = when (gameSide) {
+        HOME -> getGoalCenter(AWAY)
+        AWAY -> getGoalCenter(HOME)
+    }
+
+    private fun getGoalCenter(gameSide: GameSide): Coordinates = when (gameSide) {
+        HOME -> Coordinates(0.0, fieldHalfHeight)
+        AWAY -> Coordinates(fieldTotalWidth, fieldHalfHeight)
+    }
+
+    protected fun isAtShootingDistance(player: Player, coordinates: Coordinates): Boolean =
+            ShootingStrength.SHOOT.distance > distance(player.position, coordinates)
+
+    protected fun isAtMovingDistanceOfPlayer(player: Player, coordinates: Coordinates): Boolean =
+            FieldContext.moveDistanceByTurn > distance(player.position, coordinates)
+
+    protected fun isInHalfField(teamSide: GameSide, coordinates: Coordinates): Boolean {
         return when (teamSide) {
             HOME -> coordinates.x <= FieldContext.fieldHalfWidth
             AWAY -> coordinates.x >= FieldContext.fieldHalfWidth
+        }
+    }
+
+    protected fun isInOpponentHalfField(teamSide: GameSide, coordinates: Coordinates): Boolean {
+        return when (teamSide) {
+            HOME -> isInHalfField(AWAY, coordinates)
+            AWAY -> isInHalfField(HOME, coordinates)
         }
     }
 

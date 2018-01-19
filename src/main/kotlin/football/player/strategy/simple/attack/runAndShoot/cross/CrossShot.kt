@@ -20,7 +20,7 @@ class CrossShot(override val side: SideInTeam) : AttackStrategy() {
     override fun shoot(player: Player): Coordinates {
         val variation = FieldContext.cageWidth / 2
         val destinationVariation = Random().nextBoolean()
-        val opponentsGoalCenter = getOpponentGoalsCenter(player)
+        val opponentsGoalCenter = getOpponentGoalsCenter(player.gameSide)
 
         val destinationY = when {
             side == UP -> opponentsGoalCenter.y + variation

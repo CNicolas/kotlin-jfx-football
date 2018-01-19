@@ -15,5 +15,5 @@ abstract class DefenderStrategy(private val distanceFromGoal: Double) : Abstract
 
     override fun setInitialY(): Double = FieldContext.fieldHalfHeight
 
-    protected fun isBallInHalfField(player: Player): Boolean = this.isInTeamHalfField(player.team.gameSide, Ball.instance.position)
+    protected fun isBallInHalfField(player: Player): Boolean = this.isInHalfField(player.team.gameSide, Ball.instance.position)
 }

@@ -6,6 +6,7 @@ import football.game.GameSide
 import football.player.Player
 import football.player.ShootingStrength
 import football.player.SideInTeam
+import helpers.Coordinates
 import helpers.distance
 
 abstract class AttackStrategy : AbstractPlayerStrategy() {
@@ -25,7 +26,7 @@ abstract class AttackStrategy : AbstractPlayerStrategy() {
     }
 
     protected fun isInOpponentSurface(player: Player): Boolean {
-        val isInSurfaceByX = isAtSurfaceWidthDistanceOfOpponentGoal(player)
+        val isInSurfaceByX = isAtSurfaceWidthDistanceOfOpponentGoal(player.team.gameSide, player.position)
 
         val isInSurfaceByY = player.position.y >= FieldContext.rightSurface.y
                 && player.position.y <= FieldContext.rightSurface.height
@@ -34,15 +35,20 @@ abstract class AttackStrategy : AbstractPlayerStrategy() {
     }
 
     protected fun isAtShootingDistanceOfOpponentGoalCenter(player: Player): Boolean =
-            ShootingStrength.SHOOT.distance > distance(Ball.instance.position, getOpponentGoalsCenter(player))
+            ShootingStrength.SHOOT.distance > distance(Ball.instance.position, getOpponentGoalsCenter(player.gameSide))
 
-    protected fun isAtSurfaceWidthDistanceOfOpponentGoal(player: Player): Boolean = when (player.team.gameSide) {
-        GameSide.HOME -> player.position.x >= FieldContext.rightSurface.x
-        GameSide.AWAY -> player.position.x <= FieldContext.leftSurface.width
+    protected fun isAtSurfaceWidthDistanceOfOpponentGoal(gameSide: GameSide, coordinates: Coordinates): Boolean = when (gameSide) {
+        GameSide.HOME -> coordinates.x >= FieldContext.rightSurface.x
+        GameSide.AWAY -> coordinates.x <= FieldContext.leftSurface.width
     }
 
-    protected fun isInLastQuarterOfField(player: Player): Boolean = when (player.team.gameSide) {
-        GameSide.HOME -> player.position.x >= FieldContext.fieldTotalWidth - FieldContext.fieldTotalWidth / 4
-        GameSide.AWAY -> player.position.x <= FieldContext.fieldTotalWidth / 4
+    protected fun isInLastQuarterOfField(gameSide: GameSide, coordinates: Coordinates): Boolean = when (gameSide) {
+        GameSide.HOME -> coordinates.x >= FieldContext.fieldTotalWidth - FieldContext.fieldTotalWidth / 4
+        GameSide.AWAY -> coordinates.x <= FieldContext.fieldTotalWidth / 4
+    }
+
+    protected fun isInLastThirdOfField(gameSide: GameSide, coordinates: Coordinates): Boolean = when (gameSide) {
+        GameSide.HOME -> coordinates.x >= FieldContext.fieldTotalWidth - FieldContext.fieldTotalWidth / 3
+        GameSide.AWAY -> coordinates.x <= FieldContext.fieldTotalWidth / 3
     }
 }

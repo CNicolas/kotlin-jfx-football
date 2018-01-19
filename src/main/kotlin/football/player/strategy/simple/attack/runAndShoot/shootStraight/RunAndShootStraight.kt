@@ -17,7 +17,7 @@ class RunAndShootStraight(override val side: SideInTeam) : AttackStrategy() {
     }
 
     override fun shoot(player: Player): Coordinates {
-        val destination = getOpponentGoalsCenter(player)
+        val destination = getOpponentGoalsCenter(player.gameSide)
         val strength = when (isInOpponentSurface(player)) {
             true -> ShootingStrength.SHOOT
             false -> ShootingStrength.RUN

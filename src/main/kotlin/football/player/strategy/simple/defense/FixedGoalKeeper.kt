@@ -13,7 +13,7 @@ class FixedGoalKeeper(distanceFromGoal: Double = FieldContext.surfaceWidth / 3) 
     override fun moveWithoutBall(player: Player): Coordinates = moveTowards(player.position, initialPosition)
 
     override fun shoot(player: Player): Coordinates {
-        val destination = getOpponentGoalsCenter(player)
+        val destination = getOpponentGoalsCenter(player.gameSide)
 
         return shootTowards(player.position, destination, ShootingStrength.CLEARANCE)
     }

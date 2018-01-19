@@ -27,7 +27,7 @@ class StayAtShootDistanceOfTheBall(distanceFromGoal: Double = FieldContext.field
     }
 
     override fun shoot(player: Player): Coordinates {
-        val destination = getOpponentGoalsCenter(player)
+        val destination = getOpponentGoalsCenter(player.gameSide)
 
         return shootTowards(player.position, destination, ShootingStrength.CLEARANCE)
     }
