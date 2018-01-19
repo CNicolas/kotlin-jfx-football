@@ -30,7 +30,9 @@ class TransitionsManager {
             }
         }
 
-        playChainOfTransitions(transitions)
+        if (transitions.size > 1) {
+            playChainOfTransitions(transitions)
+        }
     }
 
     private fun playChainOfTransitions(transitions: List<TranslateTransition>) {
