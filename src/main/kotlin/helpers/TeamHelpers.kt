@@ -4,10 +4,12 @@ import football.game.GameSide
 import football.game.Team
 import football.player.SideInTeam.DOWN
 import football.player.SideInTeam.UP
+import football.player.strategy.combined.quarters.RandomQuartersStrategy
 import football.player.strategy.simple.DoesNothing
 import football.player.strategy.simple.attack.dumbRushers.DumbRusherRun
 import football.player.strategy.simple.defense.FixedGoalKeeper
 import javafx.scene.paint.Color
+import java.util.*
 
 //fun createRandomTeam(numberOfPlayers: Int): List<PlayerStrategy> {
 //    val res = mutableListOf<PlayerStrategy>()
@@ -29,7 +31,7 @@ class TeamHelpers private constructor() {
                 }
 
         fun createTeamsOfOnePlayerOnRandomSide(): List<Team> =
-                (0 until NUMBER_OF_RANDOM_SIDE_STRATEGIES).map {
+                (0 until NUMBER_OF_DISTINCT_STRATEGIES).map {
                     Team(Color.BLACK, listOf(createStrategyByNumberAndRandomSide(it)))
                 }
 
@@ -42,8 +44,8 @@ class TeamHelpers private constructor() {
                 }
 
         fun createTeamsOfTwoPlayersOnRandomSide(): List<Team> =
-                (0 until NUMBER_OF_RANDOM_SIDE_STRATEGIES).flatMap { strategy1 ->
-                    (strategy1 until NUMBER_OF_RANDOM_SIDE_STRATEGIES).map { strategy2 ->
+                (0 until NUMBER_OF_DISTINCT_STRATEGIES).flatMap { strategy1 ->
+                    (strategy1 until NUMBER_OF_DISTINCT_STRATEGIES).map { strategy2 ->
                         Team(Color.BLACK, listOf(createStrategyByNumberAndRandomSide(strategy1),
                                 createStrategyByNumberAndRandomSide(strategy2)))
                     }
@@ -61,9 +63,9 @@ class TeamHelpers private constructor() {
                 }
 
         fun createTeamsOfThreePlayersOnRandomSide(): List<Team> =
-                (0 until NUMBER_OF_RANDOM_SIDE_STRATEGIES).flatMap { strategy1 ->
-                    (strategy1 until NUMBER_OF_RANDOM_SIDE_STRATEGIES).flatMap { strategy2 ->
-                        (strategy2 until NUMBER_OF_RANDOM_SIDE_STRATEGIES).map { strategy3 ->
+                (0 until NUMBER_OF_DISTINCT_STRATEGIES).flatMap { strategy1 ->
+                    (strategy1 until NUMBER_OF_DISTINCT_STRATEGIES).flatMap { strategy2 ->
+                        (strategy2 until NUMBER_OF_DISTINCT_STRATEGIES).map { strategy3 ->
                             Team(Color.BLACK, listOf(createStrategyByNumberAndRandomSide(strategy1),
                                     createStrategyByNumberAndRandomSide(strategy2),
                                     createStrategyByNumberAndRandomSide(strategy3)))
@@ -86,10 +88,10 @@ class TeamHelpers private constructor() {
                 }
 
         fun createTeamsOfFourPlayersOnRandomSide(): List<Team> =
-                (0 until NUMBER_OF_RANDOM_SIDE_STRATEGIES).flatMap { strategy1 ->
-                    (strategy1 until NUMBER_OF_RANDOM_SIDE_STRATEGIES).flatMap { strategy2 ->
-                        (strategy2 until NUMBER_OF_RANDOM_SIDE_STRATEGIES).flatMap { strategy3 ->
-                            (strategy3 until NUMBER_OF_RANDOM_SIDE_STRATEGIES).map { strategy4 ->
+                (0 until NUMBER_OF_DISTINCT_STRATEGIES).flatMap { strategy1 ->
+                    (strategy1 until NUMBER_OF_DISTINCT_STRATEGIES).flatMap { strategy2 ->
+                        (strategy2 until NUMBER_OF_DISTINCT_STRATEGIES).flatMap { strategy3 ->
+                            (strategy3 until NUMBER_OF_DISTINCT_STRATEGIES).map { strategy4 ->
                                 Team(Color.BLACK, listOf(createStrategyByNumberAndRandomSide(strategy1),
                                         createStrategyByNumberAndRandomSide(strategy2),
                                         createStrategyByNumberAndRandomSide(strategy3),
@@ -97,6 +99,14 @@ class TeamHelpers private constructor() {
                             }
                         }
                     }
+                }
+
+        fun create100TeamsOf4RandomQuartersPlayers(): List<Team> =
+                (0 until 100).map {
+                    Team(Color.BLACK, listOf(RandomQuartersStrategy(getRandomSideInTeam(), Random()),
+                            RandomQuartersStrategy(getRandomSideInTeam(), Random()),
+                            RandomQuartersStrategy(getRandomSideInTeam(), Random()),
+                            RandomQuartersStrategy(getRandomSideInTeam(), Random())))
                 }
 
         // region Pre-made Teams

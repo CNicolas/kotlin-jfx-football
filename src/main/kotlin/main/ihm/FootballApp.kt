@@ -4,14 +4,24 @@ import football.Ball
 import football.FieldContext
 import football.game.GameSide
 import football.game.Team
-import football.player.SideInTeam.DOWN
-import football.player.SideInTeam.UP
+import football.player.SideInTeam.*
+import football.player.strategy.combined.quarters.CustomQuartersStrategy
 import football.player.strategy.combined.quarters.FollowRecoverCrossShot
 import football.player.strategy.combined.quarters.RecoverCrossShot
 import football.player.strategy.combined.runShoot.RecoverAndShoot
-import football.player.strategy.simple.attack.camper.FollowBallHorizontally
+import football.player.strategy.combined.runShoot.RunStraightAndCrossShot
+import football.player.strategy.combined.runShoot.ZigZagAndCrossShot
+import football.player.strategy.simple.attack.dumbRushers.DumbRusherNormal
 import football.player.strategy.simple.attack.dumbRushers.DumbRusherShoot
+import football.player.strategy.simple.attack.runAndShoot.cross.CrossShot
+import football.player.strategy.simple.attack.runAndShoot.cross.Overtake
+import football.player.strategy.simple.attack.runAndShoot.cross.RunZigZag
+import football.player.strategy.simple.attack.runAndShoot.shootStraight.PushBallAndShootStraight
+import football.player.strategy.simple.attack.runAndShoot.shootStraight.RunAndShootStraight
+import football.player.strategy.simple.defense.DefenderFollowingBall
+import football.player.strategy.simple.defense.FollowClearBall
 import football.player.strategy.simple.defense.FollowCrossClearBall
+import football.player.strategy.simple.midfield.StayAtShootDistanceOfTheBall
 import javafx.application.Application
 import javafx.scene.Scene
 import javafx.scene.layout.BorderPane
@@ -66,9 +76,19 @@ class FootballApp : Application() {
     }
 
     private fun createTeams(): Pair<Team, Team> {
-        val home = Team(Color.BLUE, listOf(DumbRusherShoot(DOWN), FollowRecoverCrossShot(UP), RecoverCrossShot(UP), FollowCrossClearBall()))
+        val home = Team(Color.BLUE, listOf(
+                CustomQuartersStrategy(UP, StayAtShootDistanceOfTheBall(), StayAtShootDistanceOfTheBall(), Overtake(UP), DefenderFollowingBall()),
+                CustomQuartersStrategy(DOWN, RunZigZag(DOWN), CrossShot(DOWN), DumbRusherShoot(DOWN), DumbRusherNormal(DOWN)),
+                CustomQuartersStrategy(DOWN, PushBallAndShootStraight(DOWN), FollowClearBall(), RecoverAndShoot(), RunStraightAndCrossShot(DOWN)),
+                CustomQuartersStrategy(UP, Overtake(UP), FollowRecoverCrossShot(UP), RecoverAndShoot(), RecoverCrossShot(UP))
+        ))
         home.gameSide = GameSide.HOME
-        val away = Team(Color.RED, listOf(RecoverAndShoot(), RecoverAndShoot(), FollowCrossClearBall(), FollowBallHorizontally()))
+        val away = Team(Color.RED, listOf(
+                CustomQuartersStrategy(DOWN, StayAtShootDistanceOfTheBall(), RunAndShootStraight(DOWN), Overtake(DOWN), DumbRusherShoot(DOWN)),
+                CustomQuartersStrategy(CENTER, CrossShot(CENTER), FollowClearBall(), FollowCrossClearBall(), RunZigZag(CENTER)),
+                CustomQuartersStrategy(DOWN, FollowCrossClearBall(), ZigZagAndCrossShot(DOWN), FollowClearBall(), Overtake(DOWN)),
+                CustomQuartersStrategy(DOWN, DumbRusherNormal(DOWN), ZigZagAndCrossShot(DOWN), DumbRusherNormal(DOWN), DumbRusherShoot(DOWN))
+        ))
         away.gameSide = GameSide.AWAY
 
         return Pair(home, away)

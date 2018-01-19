@@ -27,10 +27,12 @@ import football.player.strategy.simple.midfield.StayAtShootDistanceOfTheBall
 import java.util.*
 
 const val NUMBER_OF_STRATEGIES = 43
-const val NUMBER_OF_RANDOM_SIDE_STRATEGIES = 20
+const val NUMBER_OF_DISTINCT_STRATEGIES = 20
+
+fun getRandomSideInTeam(): SideInTeam = SideInTeam.values()[Random().nextInt(SideInTeam.values().size)]
 
 fun createStrategyByNumber(strategyNumber: Int): PlayerStrategy {
-    val randomSideInTeam = SideInTeam.values()[Random().nextInt(SideInTeam.values().size)]
+    val randomSideInTeam = getRandomSideInTeam()
 
     return when (strategyNumber) {
         0 -> FixedGoalKeeper()
@@ -84,7 +86,7 @@ fun createStrategyByNumber(strategyNumber: Int): PlayerStrategy {
 }
 
 fun createStrategyByNumberAndRandomSide(strategyNumber: Int): PlayerStrategy {
-    val randomSideInTeam = SideInTeam.values()[Random().nextInt(SideInTeam.values().size)]
+    val randomSideInTeam = getRandomSideInTeam()
 
     return when (strategyNumber) {
         0 -> FixedGoalKeeper()
@@ -110,6 +112,35 @@ fun createStrategyByNumberAndRandomSide(strategyNumber: Int): PlayerStrategy {
 
         else -> {
             DoesNothing(randomSideInTeam)
+        }
+    }
+}
+
+fun createStrategyByNumberAndSide(strategyNumber: Int, side: SideInTeam): PlayerStrategy {
+    return when (strategyNumber) {
+        0 -> FixedGoalKeeper()
+        1 -> DefenderFollowingBall()
+        2 -> RunAndShootStraight(side)
+        3 -> PushBallAndShootStraight(side)
+        4 -> DumbRusherRun(side)
+        5 -> DumbRusherNormal(side)
+        6 -> DumbRusherShoot(side)
+        7 -> CrossShot(side)
+        8 -> RunZigZag(side)
+        9 -> StayAtShootDistanceOfTheBall()
+        10 -> RunStraightAndCrossShot(side)
+        11 -> ZigZagAndCrossShot(side)
+        12 -> Overtake(side)
+        13 -> FollowBallHorizontally()
+        14 -> FollowClearBall()
+        15 -> RecoverAndShoot()
+        16 -> FollowRecoverCrossShot(side)
+        17 -> RecoverCrossShot(side)
+        18 -> FollowCrossClearBall()
+        19 -> CampInOpponentSurface()
+
+        else -> {
+            DoesNothing(side)
         }
     }
 }

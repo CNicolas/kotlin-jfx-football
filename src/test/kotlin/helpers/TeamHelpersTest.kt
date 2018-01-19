@@ -20,7 +20,7 @@ class TeamHelpersTest {
 
         println(teams.size)
         Assertions.assertThat(teams.size.toString())
-                .isEqualTo(numberOfCombinationsToString(1, NUMBER_OF_RANDOM_SIDE_STRATEGIES))
+                .isEqualTo(numberOfCombinationsToString(1, NUMBER_OF_DISTINCT_STRATEGIES))
     }
 
     @Test
@@ -37,10 +37,10 @@ class TeamHelpersTest {
     fun should_create_teams_of_2_players_on_random_sides() {
         val teams = TeamHelpers.createTeamsOfTwoPlayersOnRandomSide()
 
-        val numberOfCombinations = numberOfCombinations(2, NUMBER_OF_RANDOM_SIDE_STRATEGIES)
+        val numberOfCombinations = numberOfCombinations(2, NUMBER_OF_DISTINCT_STRATEGIES)
         println(teams.size)
         Assertions.assertThat(teams.size.toString())
-                .isEqualTo((numberOfCombinations + NUMBER_OF_RANDOM_SIDE_STRATEGIES).toString())
+                .isEqualTo((numberOfCombinations + NUMBER_OF_DISTINCT_STRATEGIES).toString())
     }
 
     @Test
@@ -57,14 +57,14 @@ class TeamHelpersTest {
     fun should_create_teams_of_3_players_on_random_sides() {
         val teams = TeamHelpers.createTeamsOfThreePlayersOnRandomSide()
 
-        val numberOfCombinations = numberOfCombinations(3, NUMBER_OF_RANDOM_SIDE_STRATEGIES)
+        val numberOfCombinations = numberOfCombinations(3, NUMBER_OF_DISTINCT_STRATEGIES)
         println(teams.size)
         Assertions.assertThat(teams.size.toString())
-                .isEqualTo((numberOfCombinations + Math.pow(NUMBER_OF_RANDOM_SIDE_STRATEGIES.toDouble(), 2.0)).toString())
+                .isEqualTo((numberOfCombinations + Math.pow(NUMBER_OF_DISTINCT_STRATEGIES.toDouble(), 2.0)).toString())
     }
 
 
-    @Test
+    @Test(enabled = false)
     fun should_create_all_teams_of_4_players() {
         val teams = TeamHelpers.createTeamsOfFourPlayers()
 
@@ -76,5 +76,10 @@ class TeamHelpersTest {
         val teams = TeamHelpers.createTeamsOfFourPlayersOnRandomSide()
 
         println(teams.size)
+    }
+
+    @Test
+    fun should_create_100_teams_of_4_random_quarters_players() {
+        TeamHelpers.printTeams(TeamHelpers.create100TeamsOf4RandomQuartersPlayers())
     }
 }
