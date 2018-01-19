@@ -1,13 +1,14 @@
 package football.player.strategy.simple.defense
 
 import football.Ball
+import football.FieldContext
 import football.player.Player
 import football.player.ShootingStrength
 import football.player.SideInTeam
 import football.player.strategy.DefenderStrategy
 import helpers.Coordinates
 
-class FollowClearBall : DefenderStrategy() {
+class FollowClearBall(distanceFromGoal: Double = FieldContext.surfaceWidth / 5) : DefenderStrategy(distanceFromGoal) {
     override val side: SideInTeam = SideInTeam.CENTER
 
     override fun moveWithoutBall(player: Player): Coordinates {

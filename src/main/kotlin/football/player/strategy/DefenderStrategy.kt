@@ -5,13 +5,11 @@ import football.FieldContext
 import football.game.GameSide
 import football.player.Player
 
-abstract class DefenderStrategy : AbstractPlayerStrategy() {
+abstract class DefenderStrategy(private val distanceFromGoal: Double) : AbstractPlayerStrategy() {
     override fun setInitialX(gameSide: GameSide): Double {
-        val distanceFromCage = FieldContext.fieldTotalWidth / 5
-
         return when (gameSide) {
-            GameSide.HOME -> distanceFromCage
-            else -> FieldContext.fieldTotalWidth - distanceFromCage
+            GameSide.HOME -> distanceFromGoal
+            else -> FieldContext.fieldTotalWidth - distanceFromGoal
         }
     }
 
