@@ -20,7 +20,7 @@ class FieldContext {
         const val cageHeight: Double = 50.0
         const val cageWidth: Double = cageHeight / 2
 
-        const val movingSpeed = 600.0
+        const val movingSpeed = 300.0
         const val shootingDistance = 35.0
         const val moveDistanceByTurn = 40.0
         const val maxDistanceToTouch = 5

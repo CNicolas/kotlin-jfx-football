@@ -3,6 +3,7 @@ package helpers
 import football.player.SideInTeam
 import football.player.SideInTeam.*
 import football.player.strategy.PlayerStrategy
+import football.player.strategy.combined.distanceFromBall.ForwardStriker
 import football.player.strategy.combined.quarters.FollowRecoverCrossShot
 import football.player.strategy.combined.quarters.RecoverCrossShot
 import football.player.strategy.combined.runShoot.RecoverAndShoot
@@ -26,8 +27,8 @@ import football.player.strategy.simple.defense.FollowCrossClearBall
 import football.player.strategy.simple.midfield.StayAtShootDistanceOfTheBall
 import java.util.*
 
-const val NUMBER_OF_STRATEGIES = 43
-const val NUMBER_OF_DISTINCT_STRATEGIES = 20
+const val NUMBER_OF_STRATEGIES = 46
+const val NUMBER_OF_DISTINCT_STRATEGIES = 21
 
 fun getRandomSideInTeam(): SideInTeam = SideInTeam.values()[Random().nextInt(SideInTeam.values().size)]
 
@@ -78,6 +79,9 @@ fun createStrategyByNumber(strategyNumber: Int): PlayerStrategy {
         40 -> RecoverCrossShot(DOWN)
         41 -> FollowCrossClearBall()
         42 -> CampInOpponentSurface()
+        43 -> ForwardStriker(UP)
+        44 -> ForwardStriker(CENTER)
+        45 -> ForwardStriker(DOWN)
 
         else -> {
             DoesNothing(randomSideInTeam)
@@ -109,6 +113,7 @@ fun createStrategyByNumberAndRandomSide(strategyNumber: Int): PlayerStrategy {
         17 -> RecoverCrossShot(randomSideInTeam)
         18 -> FollowCrossClearBall()
         19 -> CampInOpponentSurface()
+        20 -> ForwardStriker(randomSideInTeam)
 
         else -> {
             DoesNothing(randomSideInTeam)
@@ -138,6 +143,7 @@ fun createStrategyByNumberAndSide(strategyNumber: Int, side: SideInTeam): Player
         17 -> RecoverCrossShot(side)
         18 -> FollowCrossClearBall()
         19 -> CampInOpponentSurface()
+        20 -> ForwardStriker(side)
 
         else -> {
             DoesNothing(side)

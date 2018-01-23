@@ -2,6 +2,7 @@ package football.player.strategy.simple.defense
 
 import football.Ball
 import football.FieldContext
+import football.game.GameSide
 import football.player.Player
 import football.player.ShootingStrength
 import football.player.SideInTeam
@@ -11,9 +12,20 @@ import helpers.Coordinates
 class FollowClearBall(distanceFromGoal: Double = FieldContext.fieldTotalWidth / 6) : DefenderStrategy(distanceFromGoal) {
     override val side: SideInTeam = SideInTeam.CENTER
 
+    override fun setInitialPosition(gameSide: GameSide): Coordinates {
+        val x = setInitialX(gameSide)
+        val y = setInitialY()
+
+        initialPosition = Coordinates(x, y)
+
+        println(initialPosition)
+
+        return initialPosition
+    }
+
     override fun moveWithoutBall(player: Player): Coordinates {
         val destination = when {
-            isBallInHalfField(player) -> Ball.instance.position
+            isInHalfField(player.gameSide, Ball.instance.position) -> Ball.instance.position
             else -> Coordinates(initialPosition.x, Ball.instance.position.y)
         }
 

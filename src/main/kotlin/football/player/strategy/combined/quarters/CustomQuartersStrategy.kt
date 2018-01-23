@@ -7,5 +7,4 @@ class CustomQuartersStrategy(override val side: SideInTeam,
                              override val defenseStrategy: PlayerStrategy,
                              override val midDefenseStrategy: PlayerStrategy,
                              override val midAttackStrategy: PlayerStrategy,
-                             override val attackStrategy: PlayerStrategy) : AbstractCombinedQuartersStrategy() {
-}
+                             override val attackStrategy: PlayerStrategy) : AbstractCombinedQuartersStrategy()

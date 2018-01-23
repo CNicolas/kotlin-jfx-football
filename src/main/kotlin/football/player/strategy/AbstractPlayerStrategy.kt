@@ -56,11 +56,11 @@ abstract class AbstractPlayerStrategy : PlayerStrategy {
         AWAY -> Coordinates(fieldTotalWidth, fieldHalfHeight)
     }
 
-    protected fun isAtShootingDistance(player: Player, coordinates: Coordinates): Boolean =
-            ShootingStrength.SHOOT.distance > distance(player.position, coordinates)
+    protected fun isAtShootingDistanceOfPlayer(player: Player, coordinates: Coordinates): Boolean =
+            ShootingStrength.SHOOT.distance >= distance(player.position, coordinates)
 
     protected fun isAtMovingDistanceOfPlayer(player: Player, coordinates: Coordinates): Boolean =
-            FieldContext.moveDistanceByTurn > distance(player.position, coordinates)
+            FieldContext.moveDistanceByTurn >= distance(player.position, coordinates)
 
     protected fun isInHalfField(teamSide: GameSide, coordinates: Coordinates): Boolean {
         return when (teamSide) {

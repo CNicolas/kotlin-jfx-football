@@ -16,7 +16,7 @@ class RecoverAndShoot(distanceFromGoal: Double = FieldContext.fieldTotalWidth / 
 
     override fun moveWithoutBall(player: Player): Coordinates {
         return when {
-            isAtShootingDistance(player, Ball.instance.position) -> shootingStrategy.moveWithoutBall(player)
+            isAtShootingDistanceOfPlayer(player, Ball.instance.position) -> shootingStrategy.moveWithoutBall(player)
             else -> runningStrategy.moveWithoutBall(player)
         }
     }

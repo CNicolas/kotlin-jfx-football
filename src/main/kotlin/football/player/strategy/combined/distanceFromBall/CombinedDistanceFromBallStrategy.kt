@@ -6,6 +6,6 @@ interface CombinedDistanceFromBallStrategy : PlayerStrategy {
     val defenseNextToBallStrategy: PlayerStrategy
     val defenseAwayFromBallStrategy: PlayerStrategy
 
-    val AttackNextToBallStrategy: PlayerStrategy
-    val AttackAwayFromBallStrategy: PlayerStrategy
+    val attackNextToBallStrategy: PlayerStrategy
+    val attackAwayFromBallStrategy: PlayerStrategy
 }

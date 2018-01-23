@@ -13,12 +13,12 @@ class CampInOpponentSurface : AttackStrategy() {
     override val side: SideInTeam = SideInTeam.CENTER
 
     override fun moveWithoutBall(player: Player): Coordinates {
-        return if (isAtShootingDistance(player, Ball.instance.position)
-                && isInOpponentHalfField(player.team.gameSide, Ball.instance.position)) {
+        return if (isAtShootingDistanceOfPlayer(player, Ball.instance.position)
+                && isInOpponentHalfField(player.gameSide, Ball.instance.position)) {
             moveTowards(player.position, Ball.instance.position)
         } else {
-            val opponentGoalCenter = getOpponentGoalsCenter(player.team.gameSide)
-            val destination = when (player.team.gameSide) {
+            val opponentGoalCenter = getOpponentGoalsCenter(player.gameSide)
+            val destination = when (player.gameSide) {
                 GameSide.HOME -> opponentGoalCenter.copy(x = opponentGoalCenter.x - FieldContext.surfaceWidth)
                 GameSide.AWAY -> opponentGoalCenter.copy(x = opponentGoalCenter.x + FieldContext.surfaceWidth)
             }

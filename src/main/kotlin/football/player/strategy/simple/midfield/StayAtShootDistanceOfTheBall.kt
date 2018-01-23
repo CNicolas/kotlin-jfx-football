@@ -3,6 +3,8 @@ package football.player.strategy.simple.midfield
 import football.Ball
 import football.FieldContext
 import football.game.GameSide
+import football.game.GameSide.AWAY
+import football.game.GameSide.HOME
 import football.player.Player
 import football.player.ShootingStrength
 import football.player.SideInTeam
@@ -15,10 +17,9 @@ class StayAtShootDistanceOfTheBall(distanceFromGoal: Double = FieldContext.field
 
     override fun moveWithoutBall(player: Player): Coordinates {
         val distanceOfTheBall = ShootingStrength.SHOOT.distance
-        val toX = if (player.team.gameSide == GameSide.HOME) {
-            Math.max(Ball.instance.position.x - distanceOfTheBall, FieldContext.surfaceHeight)
-        } else {
-            Math.min(Ball.instance.position.x + distanceOfTheBall, FieldContext.fieldTotalWidth)
+        val toX = when (player.gameSide) {
+            HOME -> Math.max(Ball.instance.position.x - distanceOfTheBall, FieldContext.surfaceHeight)
+            AWAY -> Math.min(Ball.instance.position.x + distanceOfTheBall, FieldContext.fieldTotalWidth)
         }
 
         val destination = getMaxCoordinates(Ball.instance.position, Coordinates(toX, Ball.instance.position.y), distanceOfTheBall)
@@ -36,7 +37,7 @@ class StayAtShootDistanceOfTheBall(distanceFromGoal: Double = FieldContext.field
         val distanceFromMiddle = FieldContext.fieldTotalWidth / 4
 
         return when (gameSide) {
-            GameSide.HOME -> FieldContext.fieldHalfWidth - distanceFromMiddle
+            HOME -> FieldContext.fieldHalfWidth - distanceFromMiddle
             else -> FieldContext.fieldHalfWidth + distanceFromMiddle
         }
     }

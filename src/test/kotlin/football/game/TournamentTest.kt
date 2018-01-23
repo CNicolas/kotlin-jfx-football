@@ -87,6 +87,21 @@ class TournamentTest {
         println("${leaderBoard.getWinner().team.strategies}")
     }
 
+    @Test
+    fun should_play_tournament_with_100_random_teams_of_4_random_distance_from_ball_players() {
+        val tournament = Tournament()
+        val teams = TeamHelpers.create100TeamsOf4RandomDistanceFromBallPlayers()
+        Collections.shuffle(teams)
+        val tournamentTeams = teams.subList(0, 100)
+
+        val leaderBoard = tournament.playTournament(tournamentTeams)
+
+        println(leaderBoard)
+        println()
+        println("Games played : ${leaderBoard.gamesPlayed}, with ${leaderBoard.leaderBoard.size} teams")
+        println("${leaderBoard.getWinner().team.strategies}")
+    }
+
     @Test(enabled = false)
     fun should_play_tournament_with_50_teams_of_2_players() {
         val tournament = Tournament()

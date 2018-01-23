@@ -26,7 +26,7 @@ abstract class AttackStrategy : AbstractPlayerStrategy() {
     }
 
     protected fun isInOpponentSurface(player: Player): Boolean {
-        val isInSurfaceByX = isAtSurfaceWidthDistanceOfOpponentGoal(player.team.gameSide, player.position)
+        val isInSurfaceByX = isAtSurfaceWidthDistanceOfOpponentGoal(player.gameSide, player.position)
 
         val isInSurfaceByY = player.position.y >= FieldContext.rightSurface.y
                 && player.position.y <= FieldContext.rightSurface.height
