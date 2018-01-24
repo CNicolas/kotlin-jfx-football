@@ -6,8 +6,7 @@ import football.game.GameSide
 import football.game.GameSide.AWAY
 import football.game.GameSide.HOME
 import football.player.Player
-import football.player.ShootingStrength.CLEARANCE
-import football.player.ShootingStrength.NORMAL
+import football.player.ShootingStrength.*
 import football.player.SideInTeam
 import football.player.SideInTeam.*
 import football.player.strategy.AbstractPlayerStrategy
@@ -24,7 +23,17 @@ class PassTheBallToClosestAlly : AbstractPlayerStrategy() {
 
         return when (closestAlly) {
             null -> shootTowards(player.position, getOpponentGoalsCenter(player.gameSide), CLEARANCE)
-            else -> shootTowards(player.position, closestAlly.position, NORMAL)
+            else -> {
+                val distanceToClosestAlly = distance(player.position, closestAlly.position)
+                val strength = when {
+                    distanceToClosestAlly <= NORMAL.distance -> RUN
+                    distanceToClosestAlly <= SHOOT.distance -> NORMAL
+                    distanceToClosestAlly <= CLEARANCE.distance -> SHOOT
+                    else -> CLEARANCE
+                }
+
+                shootTowards(player.position, closestAlly.position, strength)
+            }
         }
     }
 
