@@ -7,6 +7,7 @@ import football.player.strategy.combined.distanceFromBall.RandomCombinedDistance
 import football.player.strategy.combined.distanceFromBall.attack.ForwardStriker
 import football.player.strategy.combined.distanceFromBall.defense.OutingGoalKeeper
 import football.player.strategy.combined.distanceFromBall.defense.RecoverCrossShootDistanceFromBall
+import football.player.strategy.combined.distanceFromBall.midfield.RecoverAndPass
 import football.player.strategy.combined.quarters.FollowRecoverCrossShot
 import football.player.strategy.combined.quarters.RandomCombinedQuartersStrategy
 import football.player.strategy.combined.quarters.RecoverCrossShootQuarters
@@ -25,12 +26,12 @@ import football.player.strategy.simple.defense.defender.DefenderFollowingBall
 import football.player.strategy.simple.defense.defender.FollowClearBall
 import football.player.strategy.simple.defense.defender.FollowCrossClearBall
 import football.player.strategy.simple.defense.goal.FixedGoalKeeper
-import football.player.strategy.simple.midfield.PassTheBallToClosestAlly
+import football.player.strategy.simple.midfield.PassToClosestAlly
 import football.player.strategy.simple.midfield.StayAtShootDistanceOfTheBall
 import java.util.*
 
-const val NUMBER_OF_STRATEGIES = 48
-const val NUMBER_OF_DISTINCT_STRATEGIES = 23
+const val NUMBER_OF_STRATEGIES = 43
+const val NUMBER_OF_DISTINCT_STRATEGIES = 24
 
 fun getRandomSideInTeam(): SideInTeam = SideInTeam.values()[Random().nextInt(SideInTeam.values().size)]
 
@@ -53,40 +54,35 @@ fun createStrategyByNumber(strategyNumber: Int): PlayerStrategy {
         11 -> PushBallAndShootStraight(UP)
         12 -> PushBallAndShootStraight(CENTER)
         13 -> PushBallAndShootStraight(DOWN)
-        14 -> DumbRusherRun(UP)
-        15 -> DumbRusherRun(CENTER)
-        16 -> DumbRusherRun(DOWN)
-        17 -> DumbRusherNormal(UP)
-        18 -> DumbRusherNormal(CENTER)
-        19 -> DumbRusherNormal(DOWN)
-        20 -> DumbRusherShoot(UP)
-        21 -> DumbRusherShoot(CENTER)
-        22 -> DumbRusherShoot(DOWN)
-        23 -> CrossShot(UP)
-        24 -> CrossShot(CENTER)
-        25 -> CrossShot(DOWN)
-        26 -> RunZigZag(UP)
-        27 -> RunZigZag(CENTER)
-        28 -> RunZigZag(DOWN)
-        29 -> StayAtShootDistanceOfTheBall()
-        30 -> Overtake(UP)
-        31 -> Overtake(DOWN)
-        32 -> FollowBallHorizontally()
-        33 -> FollowClearBall()
-        34 -> RecoverCrossShootDistanceFromBall()
-        35 -> FollowRecoverCrossShot(UP)
-        36 -> FollowRecoverCrossShot(CENTER)
-        37 -> FollowRecoverCrossShot(DOWN)
-        38 -> RecoverCrossShootQuarters(UP)
-        39 -> RecoverCrossShootQuarters(CENTER)
-        40 -> RecoverCrossShootQuarters(DOWN)
-        41 -> FollowCrossClearBall()
-        42 -> CampInOpponentSurface()
-        43 -> ForwardStriker(UP)
-        44 -> ForwardStriker(CENTER)
-        45 -> ForwardStriker(DOWN)
-        46 -> OutingGoalKeeper()
-        47 -> PassTheBallToClosestAlly()
+        14 -> DumbRusherRun(CENTER)
+        15 -> DumbRusherNormal(CENTER)
+        16 -> DumbRusherShoot(CENTER)
+        17 -> CrossShot(UP)
+        18 -> CrossShot(CENTER)
+        19 -> CrossShot(DOWN)
+        20 -> RunZigZag(UP)
+        21 -> RunZigZag(CENTER)
+        22 -> RunZigZag(DOWN)
+        23 -> StayAtShootDistanceOfTheBall()
+        24 -> Overtake(UP)
+        25 -> Overtake(DOWN)
+        26 -> FollowBallHorizontally()
+        27 -> FollowClearBall()
+        28 -> RecoverCrossShootDistanceFromBall()
+        29 -> FollowRecoverCrossShot(UP)
+        30 -> FollowRecoverCrossShot(CENTER)
+        31 -> FollowRecoverCrossShot(DOWN)
+        32 -> RecoverCrossShootQuarters(UP)
+        33 -> RecoverCrossShootQuarters(CENTER)
+        34 -> RecoverCrossShootQuarters(DOWN)
+        35 -> FollowCrossClearBall()
+        36 -> CampInOpponentSurface()
+        37 -> ForwardStriker(UP)
+        38 -> ForwardStriker(CENTER)
+        39 -> ForwardStriker(DOWN)
+        40 -> OutingGoalKeeper()
+        41 -> PassToClosestAlly()
+        42 -> RecoverAndPass()
 
         else -> {
             DoesNothing(randomSideInTeam)
@@ -125,7 +121,8 @@ fun createStrategyByNumberAndSide(strategyNumber: Int, side: SideInTeam): Player
         19 -> CampInOpponentSurface()
         20 -> ForwardStriker(side)
         21 -> OutingGoalKeeper()
-        22 -> PassTheBallToClosestAlly()
+        22 -> PassToClosestAlly()
+        23 -> RecoverAndPass()
 
         else -> {
             DoesNothing(side)

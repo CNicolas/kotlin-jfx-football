@@ -13,7 +13,7 @@ import football.player.strategy.AbstractPlayerStrategy
 import helpers.Coordinates
 import helpers.distance
 
-class PassTheBallToClosestAlly : AbstractPlayerStrategy() {
+class PassToClosestAlly : AbstractPlayerStrategy() {
     override val side: SideInTeam = CENTER
 
     override fun moveWithoutBall(player: Player): Coordinates = moveTowards(player.position, Ball.instance.position)

@@ -4,10 +4,11 @@ import football.Ball
 import football.FieldContext
 import football.game.GameSide
 import football.game.Team
-import football.player.SideInTeam
-import football.player.strategy.simple.DoesNothing
+import football.player.SideInTeam.UP
+import football.player.strategy.combined.distanceFromBall.attack.ForwardStriker
+import football.player.strategy.simple.attack.dumbRushers.DumbRusherNormal
 import football.player.strategy.simple.defense.defender.DefenderFollowingBall
-import football.player.strategy.simple.midfield.PassTheBallToClosestAlly
+import football.player.strategy.simple.midfield.PassToClosestAlly
 import javafx.application.Application
 import javafx.scene.Scene
 import javafx.scene.layout.BorderPane
@@ -68,7 +69,7 @@ class FootballApp : Application() {
 //                CustomCombinedQuartersStrategy(DOWN, PushBallAndShootStraight(DOWN), FollowClearBall(), RecoverCrossShootDistanceFromBall(), RunStraightAndCrossShot(DOWN)),
 //                CustomCombinedQuartersStrategy(UP, Overtake(UP), FollowRecoverCrossShot(UP), RecoverCrossShootDistanceFromBall(), RecoverCrossShootQuarters(UP))
 //        ))
-        val home = Team(Color.BLUE, listOf(PassTheBallToClosestAlly(), DefenderFollowingBall()))
+        val home = Team(Color.BLUE, listOf(PassToClosestAlly(), ForwardStriker(UP)))
         home.gameSide = GameSide.HOME
 //        val away = Team(Color.RED, listOf(
 //                CustomCombinedQuartersStrategy(DOWN, StayAtShootDistanceOfTheBall(), RunAndShootStraight(DOWN), Overtake(DOWN), DumbRusherShoot(DOWN)),
@@ -79,7 +80,7 @@ class FootballApp : Application() {
 //        val away = Team(Color.RED, listOf(
 //                DumbRusherShoot(DOWN), FollowRecoverCrossShot(UP), RecoverCrossShootQuarters(UP), FollowCrossClearBall()
 //        ))
-        val away = Team(Color.RED, listOf(DoesNothing(SideInTeam.UP)))
+        val away = Team(Color.RED, listOf(DumbRusherNormal(UP), DefenderFollowingBall()))
 //        val away = Team(Color.RED, listOf(DoesNothing(UP), DoesNothing(CENTER), DoesNothing(DOWN), FixedGoalKeeper()))
         away.gameSide = GameSide.AWAY
 
