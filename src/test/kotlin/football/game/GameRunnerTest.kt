@@ -3,7 +3,7 @@ package football.game
 import football.player.SideInTeam.*
 import football.player.strategy.combined.distanceFromBall.CustomCombinedDistanceFromBallStrategy
 import football.player.strategy.combined.quarters.FollowRecoverCrossShot
-import football.player.strategy.combined.runShoot.RecoverAndShoot
+import football.player.strategy.combined.distanceFromBall.RecoverAndShoot
 import football.player.strategy.combined.runShoot.ZigZagAndCrossShot
 import football.player.strategy.simple.attack.camper.CampInOpponentSurface
 import football.player.strategy.simple.attack.runAndShoot.cross.CrossShot

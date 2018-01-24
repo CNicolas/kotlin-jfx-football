@@ -32,7 +32,7 @@ class CrossShot(override val side: SideInTeam) : AttackStrategy() {
 
         val strength = when (isInOpponentSurface(player)) {
             true -> ShootingStrength.SHOOT
-            false -> ShootingStrength.RUN
+            false -> ShootingStrength.NORMAL
         }
 
         val aim = Coordinates(opponentsGoalCenter.x, destinationY)

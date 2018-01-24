@@ -3,25 +3,27 @@ package football.player.strategy
 import football.Ball
 import football.FieldContext
 import football.game.GameSide
+import football.game.GameSide.AWAY
+import football.game.GameSide.HOME
 import football.player.Player
 import football.player.ShootingStrength
-import football.player.SideInTeam
+import football.player.SideInTeam.*
 import helpers.Coordinates
 import helpers.distance
 
 abstract class AttackStrategy : AbstractPlayerStrategy() {
     override fun setInitialX(gameSide: GameSide): Double {
         return when (gameSide) {
-            GameSide.HOME -> FieldContext.fieldTotalWidth / 3
-            else -> (2 * FieldContext.fieldTotalWidth) / 3
+            HOME -> FieldContext.fieldTotalWidth / 3
+            AWAY -> (2 * FieldContext.fieldTotalWidth) / 3
         }
     }
 
     override fun setInitialY(): Double {
         return when (side) {
-            SideInTeam.UP -> FieldContext.fieldTotalHeight / 3
-            SideInTeam.DOWN -> (2 * FieldContext.fieldTotalHeight) / 3
-            else -> FieldContext.fieldHalfHeight
+            UP -> FieldContext.fieldTotalHeight / 3
+            DOWN -> (2 * FieldContext.fieldTotalHeight) / 3
+            CENTER -> FieldContext.fieldHalfHeight
         }
     }
 
@@ -38,17 +40,17 @@ abstract class AttackStrategy : AbstractPlayerStrategy() {
             ShootingStrength.SHOOT.distance > distance(Ball.instance.position, getOpponentGoalsCenter(player.gameSide))
 
     protected fun isAtSurfaceWidthDistanceOfOpponentGoal(gameSide: GameSide, coordinates: Coordinates): Boolean = when (gameSide) {
-        GameSide.HOME -> coordinates.x >= FieldContext.rightSurface.x
-        GameSide.AWAY -> coordinates.x <= FieldContext.leftSurface.width
+        HOME -> coordinates.x >= FieldContext.rightSurface.x
+        AWAY -> coordinates.x <= FieldContext.leftSurface.width
     }
 
     protected fun isInLastQuarterOfField(gameSide: GameSide, coordinates: Coordinates): Boolean = when (gameSide) {
-        GameSide.HOME -> coordinates.x >= FieldContext.fieldTotalWidth - FieldContext.fieldTotalWidth / 4
-        GameSide.AWAY -> coordinates.x <= FieldContext.fieldTotalWidth / 4
+        HOME -> coordinates.x >= FieldContext.fieldTotalWidth - FieldContext.fieldTotalWidth / 4
+        AWAY -> coordinates.x <= FieldContext.fieldTotalWidth / 4
     }
 
     protected fun isInLastThirdOfField(gameSide: GameSide, coordinates: Coordinates): Boolean = when (gameSide) {
-        GameSide.HOME -> coordinates.x >= FieldContext.fieldTotalWidth - FieldContext.fieldTotalWidth / 3
-        GameSide.AWAY -> coordinates.x <= FieldContext.fieldTotalWidth / 3
+        HOME -> coordinates.x >= FieldContext.fieldTotalWidth - FieldContext.fieldTotalWidth / 3
+        AWAY -> coordinates.x <= FieldContext.fieldTotalWidth / 3
     }
 }
