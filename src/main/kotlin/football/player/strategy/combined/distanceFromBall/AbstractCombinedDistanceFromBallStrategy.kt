@@ -39,6 +39,4 @@ abstract class AbstractCombinedDistanceFromBallStrategy : AbstractPlayerStrategy
                     else -> attackAwayFromBallStrategy
                 }
             }
-
-    override fun toString(): String = "${javaClass.simpleName}($defenseAwayFromBallStrategy, $defenseNextToBallStrategy, $attackAwayFromBallStrategy, $attackNextToBallStrategy)"
 }
