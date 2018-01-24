@@ -2,6 +2,7 @@ package main
 
 import football.Ball
 import football.FieldContext
+import football.game.GameContext
 import football.game.GameSide
 import football.game.GameSide.AWAY
 import football.game.GameSide.HOME
@@ -24,11 +25,7 @@ class GameRunner(private val home: Team,
     val states: MutableList<State> = mutableListOf()
 
     fun play(): Score {
-        states.clear()
-        home.resetPositions()
-        away.resetPositions()
-        home.score = 0
-        away.score = 0
+        beforePlaying()
 
         var turn = turns
         var scoreReached = false
@@ -90,6 +87,17 @@ class GameRunner(private val home: Team,
         }
 
         return false
+    }
+
+    private fun beforePlaying() {
+        states.clear()
+        home.resetPositions()
+        away.resetPositions()
+        home.score = 0
+        away.score = 0
+
+        GameContext.teamHome = home
+        GameContext.teamAway = away
     }
 
     private fun resetAllPositions() {

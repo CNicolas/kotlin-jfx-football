@@ -1,6 +1,7 @@
 package football.game
 
 import football.player.Player
+import football.player.PlayerName
 import football.player.PlayerName.*
 import football.player.strategy.PlayerStrategy
 import javafx.scene.paint.Color
@@ -47,6 +48,25 @@ class Team(val color: Color, val strategies: List<PlayerStrategy>) {
         player2?.setInitialPosition(player2?.strategy!!.initialPosition)
         player3?.setInitialPosition(player3?.strategy!!.initialPosition)
         player4?.setInitialPosition(player4?.strategy!!.initialPosition)
+    }
+
+    fun getAllies(name: PlayerName): List<Player> {
+        val allies = mutableListOf<Player>()
+
+        if (player1.name != name) {
+            allies.add(player1)
+        }
+        if (player2 != null && player2?.name != name) {
+            allies.add(player2!!)
+        }
+        if (player3 != null && player3?.name != name) {
+            allies.add(player3!!)
+        }
+        if (player4 != null && player4?.name != name) {
+            allies.add(player4!!)
+        }
+
+        return allies.toList()
     }
 
     fun clone(): Team {

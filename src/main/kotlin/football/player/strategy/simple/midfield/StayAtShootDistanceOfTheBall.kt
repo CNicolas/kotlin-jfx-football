@@ -38,7 +38,7 @@ class StayAtShootDistanceOfTheBall(distanceFromGoal: Double = FieldContext.field
 
         return when (gameSide) {
             HOME -> FieldContext.fieldHalfWidth - distanceFromMiddle
-            else -> FieldContext.fieldHalfWidth + distanceFromMiddle
+            AWAY -> FieldContext.fieldHalfWidth + distanceFromMiddle
         }
     }
 }
