@@ -1,6 +1,7 @@
 package football.game
 
 import football.player.Player
+import football.player.PlayerName.*
 import football.player.strategy.PlayerStrategy
 import javafx.scene.paint.Color
 
@@ -11,7 +12,7 @@ class Team(val color: Color, val strategies: List<PlayerStrategy>) {
             strategies.map { it.setInitialPosition(field) }
         }
 
-    var player1: Player = Player(this, strategies[0])
+    var player1: Player = Player(P1, this, strategies[0])
     var player2: Player? = null
     var player3: Player? = null
     var player4: Player? = null
@@ -20,17 +21,17 @@ class Team(val color: Color, val strategies: List<PlayerStrategy>) {
 
     init {
         if (strategies.size > 1) {
-            player2 = Player(this, strategies[1])
+            player2 = Player(P2, this, strategies[1])
             // BLEU VIOLET ou ROUGE-ORANGE
             player2!!.circle.fill = (player2!!.circle.fill as Color)
                     .deriveColor(20.0, 1.0, 0.7, 1.0)
             if (strategies.size > 2) {
-                player3 = Player(this, strategies[2])
+                player3 = Player(P3, this, strategies[2])
                 // VIOLET ou ORANGE
                 player3!!.circle.fill = (player3!!.circle.fill as Color)
                         .deriveColor(40.0, 2.0, 0.8, 1.0)
                 if (strategies.size > 3) {
-                    player4 = Player(this, strategies[3])
+                    player4 = Player(P4, this, strategies[3])
                     // MAGENTA ou JAUNE
                     player4!!.circle.fill = (player4!!.circle.fill as Color)
                             .deriveColor(60.0, 3.0, 0.9, 1.0)

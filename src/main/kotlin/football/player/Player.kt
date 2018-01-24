@@ -6,7 +6,7 @@ import football.player.strategy.PlayerStrategy
 import helpers.Coordinates
 import javafx.scene.shape.Circle
 
-class Player(val team: Team, val strategy: PlayerStrategy) {
+class Player(val name: PlayerName, val team: Team, val strategy: PlayerStrategy) {
     var circle: Circle = Circle(0.0, 0.0, 7.0, team.color)
     var position: Coordinates = Coordinates()
     val gameSide: GameSide
@@ -24,7 +24,7 @@ class Player(val team: Team, val strategy: PlayerStrategy) {
     fun shootTo(): Coordinates = strategy.shoot(this)
 
     fun clone(): Player {
-        val player = Player(team, strategy)
+        val player = Player(name, team, strategy)
         player.position = position.copy()
         player.circle = circle
 
