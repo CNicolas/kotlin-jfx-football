@@ -26,12 +26,13 @@ import football.player.strategy.simple.defense.defender.DefenderFollowingBall
 import football.player.strategy.simple.defense.defender.FollowClearBall
 import football.player.strategy.simple.defense.defender.FollowCrossClearBall
 import football.player.strategy.simple.defense.goal.FixedGoalKeeper
+import football.player.strategy.simple.midfield.DepthPassToClosestAlly
 import football.player.strategy.simple.midfield.PassToClosestAlly
 import football.player.strategy.simple.midfield.StayAtShootDistanceOfTheBall
 import java.util.*
 
-const val NUMBER_OF_STRATEGIES = 43
-const val NUMBER_OF_DISTINCT_STRATEGIES = 24
+const val NUMBER_OF_STRATEGIES = 44
+const val NUMBER_OF_DISTINCT_STRATEGIES = 25
 
 fun getRandomSideInTeam(): SideInTeam = SideInTeam.values()[Random().nextInt(SideInTeam.values().size)]
 
@@ -83,6 +84,7 @@ fun createStrategyByNumber(strategyNumber: Int): PlayerStrategy {
         40 -> OutingGoalKeeper()
         41 -> PassToClosestAlly()
         42 -> RecoverAndPass()
+        43 -> DepthPassToClosestAlly()
 
         else -> {
             DoesNothing(randomSideInTeam)
@@ -123,6 +125,7 @@ fun createStrategyByNumberAndSide(strategyNumber: Int, side: SideInTeam): Player
         21 -> OutingGoalKeeper()
         22 -> PassToClosestAlly()
         23 -> RecoverAndPass()
+        24 -> DepthPassToClosestAlly()
 
         else -> {
             DoesNothing(side)
