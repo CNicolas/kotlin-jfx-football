@@ -52,7 +52,7 @@ class FootballApp : Application() {
         primaryStage?.isResizable = false
         primaryStage?.show()
 
-        val runner = GameRunner(team1, team2)
+        val runner = GameRunner(team1, team2, true, 1000)
         runner.play()
 
         val transitionsManager = TransitionsManager()
@@ -61,18 +61,18 @@ class FootballApp : Application() {
 
     private fun createTeams(): Pair<Team, Team> {
 //        val home = Team(Color.BLUE, listOf(
-//                CustomQuartersStrategy(UP, StayAtShootDistanceOfTheBall(), StayAtShootDistanceOfTheBall(), Overtake(UP), DefenderFollowingBall()),
-//                CustomQuartersStrategy(DOWN, RunZigZag(DOWN), CrossShot(DOWN), DumbRusherShoot(DOWN), DumbRusherNormal(DOWN)),
-//                CustomQuartersStrategy(DOWN, PushBallAndShootStraight(DOWN), FollowClearBall(), RecoverCrossShootDistanceFromBall(), RunStraightAndCrossShot(DOWN)),
-//                CustomQuartersStrategy(UP, Overtake(UP), FollowRecoverCrossShot(UP), RecoverCrossShootDistanceFromBall(), RecoverCrossShootQuarters(UP))
+//                CustomCombinedQuartersStrategy(UP, StayAtShootDistanceOfTheBall(), StayAtShootDistanceOfTheBall(), Overtake(UP), DefenderFollowingBall()),
+//                CustomCombinedQuartersStrategy(DOWN, RunZigZag(DOWN), CrossShot(DOWN), DumbRusherShoot(DOWN), DumbRusherNormal(DOWN)),
+//                CustomCombinedQuartersStrategy(DOWN, PushBallAndShootStraight(DOWN), FollowClearBall(), RecoverCrossShootDistanceFromBall(), RunStraightAndCrossShot(DOWN)),
+//                CustomCombinedQuartersStrategy(UP, Overtake(UP), FollowRecoverCrossShot(UP), RecoverCrossShootDistanceFromBall(), RecoverCrossShootQuarters(UP))
 //        ))
         val home = Team(Color.BLUE, listOf(FixedGoalKeeper()))
         home.gameSide = GameSide.HOME
 //        val away = Team(Color.RED, listOf(
-//                CustomQuartersStrategy(DOWN, StayAtShootDistanceOfTheBall(), RunAndShootStraight(DOWN), Overtake(DOWN), DumbRusherShoot(DOWN)),
-//                CustomQuartersStrategy(CENTER, CrossShot(CENTER), FollowClearBall(), FollowCrossClearBall(), RunZigZag(CENTER)),
-//                CustomQuartersStrategy(DOWN, FollowCrossClearBall(), ZigZagAndCrossShot(DOWN), FollowClearBall(), Overtake(DOWN)),
-//                CustomQuartersStrategy(DOWN, DumbRusherNormal(DOWN), ZigZagAndCrossShot(DOWN), DumbRusherNormal(DOWN), DumbRusherShoot(DOWN))
+//                CustomCombinedQuartersStrategy(DOWN, StayAtShootDistanceOfTheBall(), RunAndShootStraight(DOWN), Overtake(DOWN), DumbRusherShoot(DOWN)),
+//                CustomCombinedQuartersStrategy(CENTER, CrossShot(CENTER), FollowClearBall(), FollowCrossClearBall(), RunZigZag(CENTER)),
+//                CustomCombinedQuartersStrategy(DOWN, FollowCrossClearBall(), ZigZagAndCrossShot(DOWN), FollowClearBall(), Overtake(DOWN)),
+//                CustomCombinedQuartersStrategy(DOWN, DumbRusherNormal(DOWN), ZigZagAndCrossShot(DOWN), DumbRusherNormal(DOWN), DumbRusherShoot(DOWN))
 //        ))
 //        val away = Team(Color.RED, listOf(
 //                DumbRusherShoot(DOWN), FollowRecoverCrossShot(UP), RecoverCrossShootQuarters(UP), FollowCrossClearBall()

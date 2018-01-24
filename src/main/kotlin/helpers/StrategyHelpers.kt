@@ -3,10 +3,12 @@ package helpers
 import football.player.SideInTeam
 import football.player.SideInTeam.*
 import football.player.strategy.PlayerStrategy
+import football.player.strategy.combined.distanceFromBall.RandomCombinedDistanceFromBallStrategy
 import football.player.strategy.combined.distanceFromBall.attack.ForwardStriker
 import football.player.strategy.combined.distanceFromBall.defense.OutingGoalKeeper
 import football.player.strategy.combined.distanceFromBall.defense.RecoverCrossShootDistanceFromBall
 import football.player.strategy.combined.quarters.FollowRecoverCrossShot
+import football.player.strategy.combined.quarters.RandomCombinedQuartersStrategy
 import football.player.strategy.combined.quarters.RecoverCrossShootQuarters
 import football.player.strategy.simple.DoesNothing
 import football.player.strategy.simple.attack.camper.CampInOpponentSurface
@@ -26,8 +28,8 @@ import football.player.strategy.simple.defense.goal.FixedGoalKeeper
 import football.player.strategy.simple.midfield.StayAtShootDistanceOfTheBall
 import java.util.*
 
-const val NUMBER_OF_STRATEGIES = 41
-const val NUMBER_OF_DISTINCT_STRATEGIES = 20
+const val NUMBER_OF_STRATEGIES = 47
+const val NUMBER_OF_DISTINCT_STRATEGIES = 22
 
 fun getRandomSideInTeam(): SideInTeam = SideInTeam.values()[Random().nextInt(SideInTeam.values().size)]
 
@@ -76,6 +78,12 @@ fun createStrategyByNumber(strategyNumber: Int): PlayerStrategy {
         38 -> ForwardStriker(CENTER)
         39 -> ForwardStriker(DOWN)
         40 -> OutingGoalKeeper()
+        41 -> RandomCombinedQuartersStrategy(UP, Random())
+        42 -> RandomCombinedQuartersStrategy(CENTER, Random())
+        43 -> RandomCombinedQuartersStrategy(DOWN, Random())
+        44 -> RandomCombinedDistanceFromBallStrategy(UP, Random())
+        45 -> RandomCombinedDistanceFromBallStrategy(CENTER, Random())
+        46 -> RandomCombinedDistanceFromBallStrategy(DOWN, Random())
 
         else -> {
             DoesNothing(randomSideInTeam)
@@ -86,32 +94,7 @@ fun createStrategyByNumber(strategyNumber: Int): PlayerStrategy {
 fun createStrategyByNumberAndRandomSide(strategyNumber: Int): PlayerStrategy {
     val randomSideInTeam = getRandomSideInTeam()
 
-    return when (strategyNumber) {
-        0 -> FixedGoalKeeper()
-        1 -> DefenderFollowingBall()
-        2 -> RunAndShootStraight(randomSideInTeam)
-        3 -> PushBallAndShootStraight(randomSideInTeam)
-        4 -> DumbRusherRun(randomSideInTeam)
-        5 -> DumbRusherNormal(randomSideInTeam)
-        6 -> DumbRusherShoot(randomSideInTeam)
-        7 -> CrossShot(randomSideInTeam)
-        8 -> RunZigZag(randomSideInTeam)
-        9 -> StayAtShootDistanceOfTheBall()
-        10 -> Overtake(randomSideInTeam)
-        11 -> FollowBallHorizontally()
-        12 -> FollowClearBall()
-        13 -> RecoverCrossShootDistanceFromBall()
-        14 -> FollowRecoverCrossShot(randomSideInTeam)
-        15 -> RecoverCrossShootQuarters(randomSideInTeam)
-        16 -> FollowCrossClearBall()
-        17 -> CampInOpponentSurface()
-        18 -> ForwardStriker(randomSideInTeam)
-        19 -> OutingGoalKeeper()
-
-        else -> {
-            DoesNothing(randomSideInTeam)
-        }
-    }
+    return createStrategyByNumberAndSide(strategyNumber, randomSideInTeam)
 }
 
 fun createStrategyByNumberAndSide(strategyNumber: Int, side: SideInTeam): PlayerStrategy {
@@ -136,6 +119,8 @@ fun createStrategyByNumberAndSide(strategyNumber: Int, side: SideInTeam): Player
         17 -> CampInOpponentSurface()
         18 -> ForwardStriker(side)
         19 -> OutingGoalKeeper()
+        20 -> RandomCombinedQuartersStrategy(side, Random())
+        21 -> RandomCombinedDistanceFromBallStrategy(side, Random())
 
         else -> {
             DoesNothing(side)

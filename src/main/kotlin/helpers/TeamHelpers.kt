@@ -5,7 +5,7 @@ import football.game.Team
 import football.player.SideInTeam.DOWN
 import football.player.SideInTeam.UP
 import football.player.strategy.combined.distanceFromBall.RandomCombinedDistanceFromBallStrategy
-import football.player.strategy.combined.quarters.RandomQuartersStrategy
+import football.player.strategy.combined.quarters.RandomCombinedQuartersStrategy
 import football.player.strategy.simple.DoesNothing
 import football.player.strategy.simple.attack.dumbRushers.DumbRusherRun
 import football.player.strategy.simple.defense.goal.FixedGoalKeeper
@@ -104,10 +104,10 @@ class TeamHelpers private constructor() {
 
         fun create100TeamsOf4RandomQuartersPlayers(): List<Team> =
                 (0 until 100).map {
-                    Team(Color.BLACK, listOf(RandomQuartersStrategy(getRandomSideInTeam(), Random()),
-                            RandomQuartersStrategy(getRandomSideInTeam(), Random()),
-                            RandomQuartersStrategy(getRandomSideInTeam(), Random()),
-                            RandomQuartersStrategy(getRandomSideInTeam(), Random())))
+                    Team(Color.BLACK, listOf(RandomCombinedQuartersStrategy(getRandomSideInTeam(), Random()),
+                            RandomCombinedQuartersStrategy(getRandomSideInTeam(), Random()),
+                            RandomCombinedQuartersStrategy(getRandomSideInTeam(), Random()),
+                            RandomCombinedQuartersStrategy(getRandomSideInTeam(), Random())))
                 }
 
         fun create100TeamsOf4RandomDistanceFromBallPlayers(): List<Team> =

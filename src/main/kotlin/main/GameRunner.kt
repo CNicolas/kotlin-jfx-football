@@ -18,7 +18,8 @@ import kotlin.collections.HashMap
 
 class GameRunner(private val home: Team,
                  private val away: Team,
-                 private val turns: Int = 1000,
+                 private val showGame: Boolean = false,
+                 private val turns: Int = 500,
                  private val score: Int = 3) {
     val states: MutableList<State> = mutableListOf()
 
@@ -101,7 +102,9 @@ class GameRunner(private val home: Team,
     }
 
     private fun addState(shouldAnimate: Boolean = true) {
-        states.add(State(home.clone(), away.clone(), Ball.instance.clone(), shouldAnimate))
+        if (showGame) {
+            states.add(State(home.clone(), away.clone(), Ball.instance.clone(), shouldAnimate))
+        }
     }
 
     private fun makeMapBetweenPlayerAndNumber(): Map<Int, Player?> {
