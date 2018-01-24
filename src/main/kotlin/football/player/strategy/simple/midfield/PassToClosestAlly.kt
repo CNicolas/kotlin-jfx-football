@@ -22,7 +22,7 @@ class PassToClosestAlly : AbstractPlayerStrategy() {
         val closestAlly = getClosestAlly(player, player.team.getAllies(player.name))
 
         return when (closestAlly) {
-            null -> shootTowards(player.position, getOpponentGoalsCenter(player.gameSide), CLEARANCE)
+            null -> shootTowards(getOpponentGoalsCenter(player.gameSide), CLEARANCE)
             else -> {
                 val distanceToClosestAlly = distance(player.position, closestAlly.position)
                 val strength = when {
@@ -32,7 +32,7 @@ class PassToClosestAlly : AbstractPlayerStrategy() {
                     else -> CLEARANCE
                 }
 
-                shootTowards(player.position, closestAlly.position, strength)
+                shootTowards(closestAlly.position, strength)
             }
         }
     }

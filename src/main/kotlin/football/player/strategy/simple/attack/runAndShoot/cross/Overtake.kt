@@ -4,7 +4,8 @@ import football.Ball
 import football.FieldContext
 import football.game.GameSide
 import football.player.Player
-import football.player.ShootingStrength
+import football.player.ShootingStrength.NORMAL
+import football.player.ShootingStrength.SHOOT
 import football.player.SideInTeam
 import football.player.strategy.simple.attack.AttackStrategy
 import helpers.Coordinates
@@ -17,12 +18,12 @@ class Overtake(override val side: SideInTeam) : AttackStrategy() {
     override fun shoot(player: Player): Coordinates {
         return when {
             isInOpponentSurface(player) ->
-                shootTowards(player.position, getOpponentGoalsCenter(player.gameSide), ShootingStrength.SHOOT)
+                shootTowards(getOpponentGoalsCenter(player.gameSide), SHOOT)
             isInLastQuarterOfField(player.gameSide, player.position) ->
-                shootTowards(player.position, getOpponentGoalsCenter(player.gameSide), ShootingStrength.NORMAL)
+                shootTowards(getOpponentGoalsCenter(player.gameSide), NORMAL)
             isInCorridor(player) ->
-                shootTowards(player.position, continueOnCorridor(player), ShootingStrength.NORMAL)
-            else -> shootTowards(player.position, corridorClosestLocation(player), ShootingStrength.NORMAL)
+                shootTowards(continueOnCorridor(player), NORMAL)
+            else -> shootTowards(corridorClosestLocation(player), NORMAL)
         }
     }
 

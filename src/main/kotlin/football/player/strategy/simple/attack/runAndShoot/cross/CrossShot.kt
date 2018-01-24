@@ -36,6 +36,6 @@ class CrossShot(override val side: SideInTeam) : AttackStrategy() {
         }
 
         val aim = Coordinates(opponentsGoalCenter.x, destinationY)
-        return shootTowards(player.position, aim, strength)
+        return shootTowards(aim, strength)
     }
 }

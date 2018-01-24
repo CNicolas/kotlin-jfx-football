@@ -21,6 +21,6 @@ class PushBallAndShootStraight(override val side: SideInTeam) : AttackStrategy()
             false -> ShootingStrength.NORMAL
         }
 
-        return shootTowards(player.position, destination, strength)
+        return shootTowards(destination, strength)
     }
 }

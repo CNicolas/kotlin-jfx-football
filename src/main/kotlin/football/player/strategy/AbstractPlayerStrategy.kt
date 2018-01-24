@@ -1,5 +1,6 @@
 package football.player.strategy
 
+import football.Ball
 import football.FieldContext
 import football.FieldContext.Companion.fieldHalfHeight
 import football.FieldContext.Companion.fieldTotalWidth
@@ -31,7 +32,8 @@ abstract class AbstractPlayerStrategy : PlayerStrategy {
         return getMaxCoordinates(from, aim, moveDistanceByTurn)
     }
 
-    protected fun shootTowards(from: Coordinates, aim: Coordinates, strength: ShootingStrength): Coordinates {
+    protected fun shootTowards(aim: Coordinates, strength: ShootingStrength): Coordinates {
+        val from = Ball.instance.position
         val linearFunction = extractFunctionOfLine(from, aim)
         val variation = 10
 

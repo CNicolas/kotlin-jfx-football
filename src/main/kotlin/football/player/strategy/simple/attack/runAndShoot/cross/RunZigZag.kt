@@ -3,7 +3,7 @@ package football.player.strategy.simple.attack.runAndShoot.cross
 import football.Ball
 import football.FieldContext
 import football.player.Player
-import football.player.ShootingStrength
+import football.player.ShootingStrength.NORMAL
 import football.player.SideInTeam
 import football.player.SideInTeam.*
 import football.player.strategy.simple.attack.AttackStrategy
@@ -38,7 +38,6 @@ class RunZigZag(override val side: SideInTeam) : AttackStrategy() {
         }
         direction = !direction
 
-        val aim = Coordinates(opponentsGoalCenter.x, destinationY)
-        return shootTowards(player.position, aim, ShootingStrength.NORMAL)
+        return shootTowards(Coordinates(opponentsGoalCenter.x, destinationY), NORMAL)
     }
 }

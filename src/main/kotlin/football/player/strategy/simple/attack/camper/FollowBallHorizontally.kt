@@ -3,6 +3,7 @@ package football.player.strategy.simple.attack.camper
 import football.Ball
 import football.player.Player
 import football.player.ShootingStrength
+import football.player.ShootingStrength.SHOOT
 import football.player.SideInTeam
 import football.player.strategy.simple.attack.AttackStrategy
 import helpers.Coordinates
@@ -21,5 +22,5 @@ class FollowBallHorizontally : AttackStrategy() {
         }
     }
 
-    override fun shoot(player: Player): Coordinates = shootTowards(player.position, getOpponentGoalsCenter(player.gameSide), ShootingStrength.SHOOT)
+    override fun shoot(player: Player): Coordinates = shootTowards(getOpponentGoalsCenter(player.gameSide), SHOOT)
 }

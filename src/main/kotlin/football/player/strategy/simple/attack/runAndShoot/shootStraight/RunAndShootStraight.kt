@@ -23,7 +23,7 @@ class RunAndShootStraight(override val side: SideInTeam) : AttackStrategy() {
             false -> ShootingStrength.RUN
         }
 
-        return shootTowards(player.position, destination, strength)
+        return shootTowards(destination, strength)
     }
 
     override fun setInitialX(gameSide: GameSide): Double {

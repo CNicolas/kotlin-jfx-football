@@ -3,7 +3,7 @@ package football.player.strategy.simple.defense.defender
 import football.Ball
 import football.FieldContext
 import football.player.Player
-import football.player.ShootingStrength
+import football.player.ShootingStrength.CLEARANCE
 import football.player.SideInTeam
 import football.player.strategy.simple.defense.DefenderStrategy
 import helpers.Coordinates
@@ -17,9 +17,5 @@ class DefenderFollowingBall(distanceFromGoal: Double = FieldContext.fieldTotalWi
         return moveTowards(player.position, destination)
     }
 
-    override fun shoot(player: Player): Coordinates {
-        val destination = getOpponentGoalsCenter(player.gameSide)
-
-        return shootTowards(player.position, destination, ShootingStrength.CLEARANCE)
-    }
+    override fun shoot(player: Player): Coordinates = shootTowards(getOpponentGoalsCenter(player.gameSide), CLEARANCE)
 }

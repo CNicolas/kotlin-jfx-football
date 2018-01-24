@@ -3,7 +3,7 @@ package football.player.strategy.simple.defense.defender
 import football.Ball
 import football.FieldContext
 import football.player.Player
-import football.player.ShootingStrength
+import football.player.ShootingStrength.CLEARANCE
 import football.player.SideInTeam
 import football.player.strategy.simple.defense.DefenderStrategy
 import helpers.Coordinates
@@ -29,6 +29,6 @@ class FollowCrossClearBall(distanceFromGoal: Double = FieldContext.fieldTotalWid
         }
         val destination = getOpponentGoalsCenter(player.gameSide)
 
-        return shootTowards(player.position, destination.copy(y = destination.y + variation), ShootingStrength.CLEARANCE)
+        return shootTowards(destination.copy(y = destination.y + variation), CLEARANCE)
     }
 }
