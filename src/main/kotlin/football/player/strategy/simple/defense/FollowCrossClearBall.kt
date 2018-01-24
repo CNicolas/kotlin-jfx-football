@@ -14,7 +14,7 @@ class FollowCrossClearBall(distanceFromGoal: Double = FieldContext.fieldTotalWid
 
     override fun moveWithoutBall(player: Player): Coordinates {
         val destination = when {
-            isBallInHalfField(player) -> Ball.instance.position
+            isInHalfField(player.gameSide, Ball.instance.position) -> Ball.instance.position
             else -> Coordinates(initialPosition.x, Ball.instance.position.y)
         }
 

@@ -6,7 +6,7 @@ import football.player.strategy.PlayerStrategy
 import football.player.strategy.combined.distanceFromBall.ForwardStriker
 import football.player.strategy.combined.quarters.FollowRecoverCrossShot
 import football.player.strategy.combined.quarters.RecoverCrossShot
-import football.player.strategy.combined.runShoot.RecoverAndShoot
+import football.player.strategy.combined.distanceFromBall.RecoverAndShoot
 import football.player.strategy.combined.runShoot.RunStraightAndCrossShot
 import football.player.strategy.combined.runShoot.ZigZagAndCrossShot
 import football.player.strategy.simple.DoesNothing

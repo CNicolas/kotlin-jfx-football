@@ -10,6 +10,19 @@ import football.player.strategy.PlayerStrategy
 import helpers.Coordinates
 
 abstract class AbstractCombinedQuartersStrategy : AbstractPlayerStrategy(), CombinedQuartersStrategy {
+    override fun setInitialPosition(gameSide: GameSide): Coordinates {
+        val x = setInitialX(gameSide)
+        val y = setInitialY()
+
+        initialPosition = Coordinates(x, y)
+        defenseStrategy.initialPosition = initialPosition
+        midDefenseStrategy.initialPosition = initialPosition
+        midAttackStrategy.initialPosition = initialPosition
+        attackStrategy.initialPosition = initialPosition
+
+        return initialPosition
+    }
+
     override fun setInitialX(gameSide: GameSide): Double = midDefenseStrategy.setInitialX(gameSide)
 
     override fun setInitialY(): Double = midDefenseStrategy.setInitialY()

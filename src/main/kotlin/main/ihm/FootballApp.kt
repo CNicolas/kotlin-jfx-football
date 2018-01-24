@@ -4,23 +4,8 @@ import football.Ball
 import football.FieldContext
 import football.game.GameSide
 import football.game.Team
-import football.player.SideInTeam.DOWN
-import football.player.SideInTeam.UP
-import football.player.strategy.combined.quarters.CustomQuartersStrategy
-import football.player.strategy.combined.quarters.FollowRecoverCrossShot
-import football.player.strategy.combined.quarters.RecoverCrossShot
-import football.player.strategy.combined.runShoot.RecoverAndShoot
-import football.player.strategy.combined.runShoot.RunStraightAndCrossShot
-import football.player.strategy.simple.attack.dumbRushers.DumbRusherNormal
-import football.player.strategy.simple.attack.dumbRushers.DumbRusherShoot
-import football.player.strategy.simple.attack.runAndShoot.cross.CrossShot
-import football.player.strategy.simple.attack.runAndShoot.cross.Overtake
-import football.player.strategy.simple.attack.runAndShoot.cross.RunZigZag
-import football.player.strategy.simple.attack.runAndShoot.shootStraight.PushBallAndShootStraight
-import football.player.strategy.simple.defense.DefenderFollowingBall
-import football.player.strategy.simple.defense.FollowClearBall
-import football.player.strategy.simple.defense.FollowCrossClearBall
-import football.player.strategy.simple.midfield.StayAtShootDistanceOfTheBall
+import football.player.strategy.combined.distanceFromBall.RecoverAndShoot
+import football.player.strategy.simple.defense.FixedGoalKeeper
 import javafx.application.Application
 import javafx.scene.Scene
 import javafx.scene.layout.BorderPane
@@ -75,13 +60,13 @@ class FootballApp : Application() {
     }
 
     private fun createTeams(): Pair<Team, Team> {
-        val home = Team(Color.BLUE, listOf(
-                CustomQuartersStrategy(UP, StayAtShootDistanceOfTheBall(), StayAtShootDistanceOfTheBall(), Overtake(UP), DefenderFollowingBall()),
-                CustomQuartersStrategy(DOWN, RunZigZag(DOWN), CrossShot(DOWN), DumbRusherShoot(DOWN), DumbRusherNormal(DOWN)),
-                CustomQuartersStrategy(DOWN, PushBallAndShootStraight(DOWN), FollowClearBall(), RecoverAndShoot(), RunStraightAndCrossShot(DOWN)),
-                CustomQuartersStrategy(UP, Overtake(UP), FollowRecoverCrossShot(UP), RecoverAndShoot(), RecoverCrossShot(UP))
-        ))
-//        val home = Team(Color.BLUE, listOf(DoesNothing(UP), DoesNothing(CENTER), DoesNothing(DOWN), FixedGoalKeeper()))
+//        val home = Team(Color.BLUE, listOf(
+//                CustomQuartersStrategy(UP, StayAtShootDistanceOfTheBall(), StayAtShootDistanceOfTheBall(), Overtake(UP), DefenderFollowingBall()),
+//                CustomQuartersStrategy(DOWN, RunZigZag(DOWN), CrossShot(DOWN), DumbRusherShoot(DOWN), DumbRusherNormal(DOWN)),
+//                CustomQuartersStrategy(DOWN, PushBallAndShootStraight(DOWN), FollowClearBall(), RecoverAndShoot(), RunStraightAndCrossShot(DOWN)),
+//                CustomQuartersStrategy(UP, Overtake(UP), FollowRecoverCrossShot(UP), RecoverAndShoot(), RecoverCrossShot(UP))
+//        ))
+        val home = Team(Color.BLUE, listOf(FixedGoalKeeper()))
         home.gameSide = GameSide.HOME
 //        val away = Team(Color.RED, listOf(
 //                CustomQuartersStrategy(DOWN, StayAtShootDistanceOfTheBall(), RunAndShootStraight(DOWN), Overtake(DOWN), DumbRusherShoot(DOWN)),
@@ -89,9 +74,10 @@ class FootballApp : Application() {
 //                CustomQuartersStrategy(DOWN, FollowCrossClearBall(), ZigZagAndCrossShot(DOWN), FollowClearBall(), Overtake(DOWN)),
 //                CustomQuartersStrategy(DOWN, DumbRusherNormal(DOWN), ZigZagAndCrossShot(DOWN), DumbRusherNormal(DOWN), DumbRusherShoot(DOWN))
 //        ))
-        val away = Team(Color.RED, listOf(
-                DumbRusherShoot(DOWN), FollowRecoverCrossShot(UP), RecoverCrossShot(UP), FollowCrossClearBall()
-        ))
+//        val away = Team(Color.RED, listOf(
+//                DumbRusherShoot(DOWN), FollowRecoverCrossShot(UP), RecoverCrossShot(UP), FollowCrossClearBall()
+//        ))
+        val away = Team(Color.RED, listOf(RecoverAndShoot()))
 //        val away = Team(Color.RED, listOf(DoesNothing(UP), DoesNothing(CENTER), DoesNothing(DOWN), FixedGoalKeeper()))
         away.gameSide = GameSide.AWAY
 

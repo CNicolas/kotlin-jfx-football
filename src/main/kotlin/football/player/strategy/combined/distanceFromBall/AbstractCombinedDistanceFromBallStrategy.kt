@@ -8,6 +8,19 @@ import football.player.strategy.PlayerStrategy
 import helpers.Coordinates
 
 abstract class AbstractCombinedDistanceFromBallStrategy : AbstractPlayerStrategy(), CombinedDistanceFromBallStrategy {
+    override fun setInitialPosition(gameSide: GameSide): Coordinates {
+        val x = setInitialX(gameSide)
+        val y = setInitialY()
+
+        initialPosition = Coordinates(x, y)
+        defenseNextToBallStrategy.initialPosition = initialPosition
+        defenseAwayFromBallStrategy.initialPosition = initialPosition
+        attackNextToBallStrategy.initialPosition = initialPosition
+        attackAwayFromBallStrategy.initialPosition = initialPosition
+
+        return initialPosition
+    }
+
     override fun setInitialX(gameSide: GameSide): Double = defenseAwayFromBallStrategy.setInitialX(gameSide)
 
     override fun setInitialY(): Double = defenseAwayFromBallStrategy.setInitialY()
