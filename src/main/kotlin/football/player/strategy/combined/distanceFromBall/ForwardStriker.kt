@@ -7,8 +7,8 @@ import football.player.strategy.simple.attack.runAndShoot.cross.CrossShot
 import football.player.strategy.simple.defense.FollowCrossClearBall
 
 class ForwardStriker(override val side: SideInTeam) : AbstractCombinedDistanceFromBallStrategy() {
-    override val defenseNextToBallStrategy: PlayerStrategy = FollowCrossClearBall()
     override val defenseAwayFromBallStrategy: PlayerStrategy = RecoverAndShoot()
-    override val attackNextToBallStrategy: PlayerStrategy = CrossShot(side)
+    override val defenseNextToBallStrategy: PlayerStrategy = FollowCrossClearBall()
     override val attackAwayFromBallStrategy: PlayerStrategy = InFrontOfBall()
+    override val attackNextToBallStrategy: PlayerStrategy = CrossShot(side)
 }

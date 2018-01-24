@@ -18,6 +18,15 @@ import helpers.getMaxCoordinates
 abstract class AbstractPlayerStrategy : PlayerStrategy {
     override var initialPosition: Coordinates = Coordinates()
 
+    override fun setInitialPosition(gameSide: GameSide): Coordinates {
+        val x = setInitialX(gameSide)
+        val y = setInitialY()
+
+        initialPosition = Coordinates(x, y)
+
+        return initialPosition
+    }
+
     protected fun moveTowards(from: Coordinates, aim: Coordinates): Coordinates {
         return getMaxCoordinates(from, aim, moveDistanceByTurn)
     }
@@ -35,15 +44,6 @@ abstract class AbstractPlayerStrategy : PlayerStrategy {
         val trueY = linearFunction(trueX)
 
         return getMaxCoordinates(from, Coordinates(trueX, trueY), strength.distance)
-    }
-
-    override fun setInitialPosition(gameSide: GameSide): Coordinates {
-        val x = setInitialX(gameSide)
-        val y = setInitialY()
-
-        initialPosition = Coordinates(x, y)
-
-        return initialPosition
     }
 
     protected fun getOpponentGoalsCenter(gameSide: GameSide): Coordinates = when (gameSide) {

@@ -13,10 +13,10 @@ abstract class AbstractCombinedDistanceFromBallStrategy : AbstractPlayerStrategy
         val y = setInitialY()
 
         initialPosition = Coordinates(x, y)
-        defenseNextToBallStrategy.initialPosition = initialPosition
         defenseAwayFromBallStrategy.initialPosition = initialPosition
-        attackNextToBallStrategy.initialPosition = initialPosition
+        defenseNextToBallStrategy.initialPosition = initialPosition
         attackAwayFromBallStrategy.initialPosition = initialPosition
+        attackNextToBallStrategy.initialPosition = initialPosition
 
         return initialPosition
     }
@@ -39,4 +39,6 @@ abstract class AbstractCombinedDistanceFromBallStrategy : AbstractPlayerStrategy
                     else -> attackAwayFromBallStrategy
                 }
             }
+
+    override fun toString(): String = "${javaClass.simpleName}($defenseAwayFromBallStrategy, $defenseNextToBallStrategy, $attackAwayFromBallStrategy, $attackNextToBallStrategy)"
 }

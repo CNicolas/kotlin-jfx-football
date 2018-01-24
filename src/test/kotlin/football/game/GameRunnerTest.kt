@@ -2,8 +2,8 @@ package football.game
 
 import football.player.SideInTeam.*
 import football.player.strategy.combined.distanceFromBall.CustomCombinedDistanceFromBallStrategy
-import football.player.strategy.combined.quarters.FollowRecoverCrossShot
 import football.player.strategy.combined.distanceFromBall.RecoverAndShoot
+import football.player.strategy.combined.quarters.FollowRecoverCrossShot
 import football.player.strategy.combined.runShoot.ZigZagAndCrossShot
 import football.player.strategy.simple.attack.camper.CampInOpponentSurface
 import football.player.strategy.simple.attack.runAndShoot.cross.CrossShot
@@ -63,10 +63,34 @@ class GameRunnerTest {
     @Test
     fun team_home_should_win() {
         val home = Team(Color.BLUE, listOf(
-                CustomCombinedDistanceFromBallStrategy(UP, RecoverAndShoot(), RunZigZag(UP), ZigZagAndCrossShot(UP), DefenderFollowingBall()),
-                CustomCombinedDistanceFromBallStrategy(DOWN, Overtake(DOWN), CampInOpponentSurface(), ZigZagAndCrossShot(DOWN), FollowRecoverCrossShot(DOWN)),
-                CustomCombinedDistanceFromBallStrategy(CENTER, FollowClearBall(), RunZigZag(CENTER), FollowCrossClearBall(), DefenderFollowingBall()),
-                CustomCombinedDistanceFromBallStrategy(UP, CrossShot(UP), FollowClearBall(), FollowRecoverCrossShot(UP), FollowClearBall())
+                CustomCombinedDistanceFromBallStrategy(
+                        UP,
+                        defenseAwayFromBallStrategy = RunZigZag(UP),
+                        defenseNextToBallStrategy = RecoverAndShoot(),
+                        attackAwayFromBallStrategy = DefenderFollowingBall(),
+                        attackNextToBallStrategy = ZigZagAndCrossShot(UP)
+                ),
+                CustomCombinedDistanceFromBallStrategy(
+                        DOWN,
+                        defenseAwayFromBallStrategy = CampInOpponentSurface(),
+                        defenseNextToBallStrategy = Overtake(DOWN),
+                        attackAwayFromBallStrategy = FollowRecoverCrossShot(DOWN),
+                        attackNextToBallStrategy = ZigZagAndCrossShot(DOWN)
+                ),
+                CustomCombinedDistanceFromBallStrategy(
+                        CENTER,
+                        defenseAwayFromBallStrategy = RunZigZag(CENTER),
+                        defenseNextToBallStrategy = FollowClearBall(),
+                        attackAwayFromBallStrategy = DefenderFollowingBall(),
+                        attackNextToBallStrategy = FollowCrossClearBall()
+                ),
+                CustomCombinedDistanceFromBallStrategy(
+                        UP,
+                        defenseAwayFromBallStrategy = FollowClearBall(),
+                        defenseNextToBallStrategy = CrossShot(UP),
+                        attackAwayFromBallStrategy = FollowClearBall(),
+                        attackNextToBallStrategy = FollowRecoverCrossShot(UP)
+                )
         ))
         val away = TeamHelpers.createDumbRusherRunUPDumbRusherRunDOWN(Color.RED, GameSide.AWAY)
 
