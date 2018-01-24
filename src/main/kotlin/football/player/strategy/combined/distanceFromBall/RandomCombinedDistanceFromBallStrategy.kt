@@ -12,5 +12,5 @@ class RandomCombinedDistanceFromBallStrategy(override val side: SideInTeam, rand
     override val attackAwayFromBallStrategy: PlayerStrategy = createStrategyByNumberAndSide(random.nextInt(NUMBER_OF_DISTINCT_STRATEGIES), side)
     override val attackNextToBallStrategy: PlayerStrategy = createStrategyByNumberAndSide(random.nextInt(NUMBER_OF_DISTINCT_STRATEGIES), side)
 
-    override fun toString() = "${javaClass.simpleName}($defenseNextToBallStrategy, $defenseAwayFromBallStrategy, $attackNextToBallStrategy, $attackAwayFromBallStrategy)"
+    override fun toString() = "${javaClass.simpleName}($defenseAwayFromBallStrategy, $defenseNextToBallStrategy, $attackAwayFromBallStrategy, $attackNextToBallStrategy)"
 }

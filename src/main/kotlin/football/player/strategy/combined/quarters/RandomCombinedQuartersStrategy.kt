@@ -11,4 +11,6 @@ class RandomCombinedQuartersStrategy(override val side: SideInTeam, random: Rand
     override val midDefenseStrategy: PlayerStrategy = createStrategyByNumberAndSide(random.nextInt(NUMBER_OF_DISTINCT_STRATEGIES), side)
     override val midAttackStrategy: PlayerStrategy = createStrategyByNumberAndSide(random.nextInt(NUMBER_OF_DISTINCT_STRATEGIES), side)
     override val attackStrategy: PlayerStrategy = createStrategyByNumberAndSide(random.nextInt(NUMBER_OF_DISTINCT_STRATEGIES), side)
+
+    override fun toString() = "${javaClass.simpleName}($defenseStrategy, $midDefenseStrategy, $midAttackStrategy, $attackStrategy)"
 }

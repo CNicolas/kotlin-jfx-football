@@ -7,4 +7,7 @@ class CustomCombinedQuartersStrategy(override val side: SideInTeam,
                                      override val defenseStrategy: PlayerStrategy,
                                      override val midDefenseStrategy: PlayerStrategy,
                                      override val midAttackStrategy: PlayerStrategy,
-                                     override val attackStrategy: PlayerStrategy) : AbstractCombinedQuartersStrategy()
+                                     override val attackStrategy: PlayerStrategy) : AbstractCombinedQuartersStrategy() {
+
+    override fun toString() = "${javaClass.simpleName}($defenseStrategy, $midDefenseStrategy, $midAttackStrategy, $attackStrategy)"
+}

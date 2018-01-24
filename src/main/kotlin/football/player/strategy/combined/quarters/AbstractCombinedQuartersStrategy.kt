@@ -48,6 +48,4 @@ abstract class AbstractCombinedQuartersStrategy : AbstractPlayerStrategy(), Comb
             }
         }
     }
-
-    override fun toString(): String = "${javaClass.simpleName}($defenseStrategy, $midDefenseStrategy, $midAttackStrategy, $attackStrategy)"
 }
