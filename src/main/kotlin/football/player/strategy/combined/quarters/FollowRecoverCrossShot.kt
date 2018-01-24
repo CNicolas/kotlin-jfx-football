@@ -4,7 +4,7 @@ import football.player.SideInTeam
 import football.player.strategy.PlayerStrategy
 import football.player.strategy.simple.attack.runAndShoot.cross.CrossShot
 import football.player.strategy.simple.attack.runAndShoot.cross.RunZigZag
-import football.player.strategy.simple.defense.DefenderFollowingBall
+import football.player.strategy.simple.defense.defender.DefenderFollowingBall
 import football.player.strategy.simple.midfield.StayAtShootDistanceOfTheBall
 
 class FollowRecoverCrossShot(override val side: SideInTeam) : AbstractCombinedQuartersStrategy() {

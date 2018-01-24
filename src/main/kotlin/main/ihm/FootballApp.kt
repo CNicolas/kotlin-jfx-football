@@ -4,8 +4,8 @@ import football.Ball
 import football.FieldContext
 import football.game.GameSide
 import football.game.Team
-import football.player.strategy.combined.distanceFromBall.RecoverAndShoot
-import football.player.strategy.simple.defense.FixedGoalKeeper
+import football.player.strategy.combined.distanceFromBall.defense.RecoverCrossShootDistanceFromBall
+import football.player.strategy.simple.defense.goal.FixedGoalKeeper
 import javafx.application.Application
 import javafx.scene.Scene
 import javafx.scene.layout.BorderPane
@@ -63,8 +63,8 @@ class FootballApp : Application() {
 //        val home = Team(Color.BLUE, listOf(
 //                CustomQuartersStrategy(UP, StayAtShootDistanceOfTheBall(), StayAtShootDistanceOfTheBall(), Overtake(UP), DefenderFollowingBall()),
 //                CustomQuartersStrategy(DOWN, RunZigZag(DOWN), CrossShot(DOWN), DumbRusherShoot(DOWN), DumbRusherNormal(DOWN)),
-//                CustomQuartersStrategy(DOWN, PushBallAndShootStraight(DOWN), FollowClearBall(), RecoverAndShoot(), RunStraightAndCrossShot(DOWN)),
-//                CustomQuartersStrategy(UP, Overtake(UP), FollowRecoverCrossShot(UP), RecoverAndShoot(), RecoverCrossShot(UP))
+//                CustomQuartersStrategy(DOWN, PushBallAndShootStraight(DOWN), FollowClearBall(), RecoverCrossShootDistanceFromBall(), RunStraightAndCrossShot(DOWN)),
+//                CustomQuartersStrategy(UP, Overtake(UP), FollowRecoverCrossShot(UP), RecoverCrossShootDistanceFromBall(), RecoverCrossShootQuarters(UP))
 //        ))
         val home = Team(Color.BLUE, listOf(FixedGoalKeeper()))
         home.gameSide = GameSide.HOME
@@ -75,9 +75,9 @@ class FootballApp : Application() {
 //                CustomQuartersStrategy(DOWN, DumbRusherNormal(DOWN), ZigZagAndCrossShot(DOWN), DumbRusherNormal(DOWN), DumbRusherShoot(DOWN))
 //        ))
 //        val away = Team(Color.RED, listOf(
-//                DumbRusherShoot(DOWN), FollowRecoverCrossShot(UP), RecoverCrossShot(UP), FollowCrossClearBall()
+//                DumbRusherShoot(DOWN), FollowRecoverCrossShot(UP), RecoverCrossShootQuarters(UP), FollowCrossClearBall()
 //        ))
-        val away = Team(Color.RED, listOf(RecoverAndShoot()))
+        val away = Team(Color.RED, listOf(RecoverCrossShootDistanceFromBall()))
 //        val away = Team(Color.RED, listOf(DoesNothing(UP), DoesNothing(CENTER), DoesNothing(DOWN), FixedGoalKeeper()))
         away.gameSide = GameSide.AWAY
 

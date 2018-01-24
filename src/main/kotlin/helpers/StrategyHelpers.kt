@@ -3,12 +3,11 @@ package helpers
 import football.player.SideInTeam
 import football.player.SideInTeam.*
 import football.player.strategy.PlayerStrategy
-import football.player.strategy.combined.distanceFromBall.ForwardStriker
+import football.player.strategy.combined.distanceFromBall.attack.ForwardStriker
+import football.player.strategy.combined.distanceFromBall.defense.OutingGoalKeeper
+import football.player.strategy.combined.distanceFromBall.defense.RecoverCrossShootDistanceFromBall
 import football.player.strategy.combined.quarters.FollowRecoverCrossShot
-import football.player.strategy.combined.quarters.RecoverCrossShot
-import football.player.strategy.combined.distanceFromBall.RecoverAndShoot
-import football.player.strategy.combined.runShoot.RunStraightAndCrossShot
-import football.player.strategy.combined.runShoot.ZigZagAndCrossShot
+import football.player.strategy.combined.quarters.RecoverCrossShootQuarters
 import football.player.strategy.simple.DoesNothing
 import football.player.strategy.simple.attack.camper.CampInOpponentSurface
 import football.player.strategy.simple.attack.camper.FollowBallHorizontally
@@ -20,15 +19,15 @@ import football.player.strategy.simple.attack.runAndShoot.cross.Overtake
 import football.player.strategy.simple.attack.runAndShoot.cross.RunZigZag
 import football.player.strategy.simple.attack.runAndShoot.shootStraight.PushBallAndShootStraight
 import football.player.strategy.simple.attack.runAndShoot.shootStraight.RunAndShootStraight
-import football.player.strategy.simple.defense.DefenderFollowingBall
-import football.player.strategy.simple.defense.FixedGoalKeeper
-import football.player.strategy.simple.defense.FollowClearBall
-import football.player.strategy.simple.defense.FollowCrossClearBall
+import football.player.strategy.simple.defense.defender.DefenderFollowingBall
+import football.player.strategy.simple.defense.defender.FollowClearBall
+import football.player.strategy.simple.defense.defender.FollowCrossClearBall
+import football.player.strategy.simple.defense.goal.FixedGoalKeeper
 import football.player.strategy.simple.midfield.StayAtShootDistanceOfTheBall
 import java.util.*
 
-const val NUMBER_OF_STRATEGIES = 46
-const val NUMBER_OF_DISTINCT_STRATEGIES = 21
+const val NUMBER_OF_STRATEGIES = 41
+const val NUMBER_OF_DISTINCT_STRATEGIES = 20
 
 fun getRandomSideInTeam(): SideInTeam = SideInTeam.values()[Random().nextInt(SideInTeam.values().size)]
 
@@ -60,28 +59,23 @@ fun createStrategyByNumber(strategyNumber: Int): PlayerStrategy {
         21 -> RunZigZag(CENTER)
         22 -> RunZigZag(DOWN)
         23 -> StayAtShootDistanceOfTheBall()
-        24 -> RunStraightAndCrossShot(UP)
-        25 -> RunStraightAndCrossShot(CENTER)
-        26 -> RunStraightAndCrossShot(DOWN)
-        27 -> ZigZagAndCrossShot(UP)
-        28 -> ZigZagAndCrossShot(CENTER)
-        29 -> ZigZagAndCrossShot(DOWN)
-        30 -> Overtake(UP)
-        31 -> Overtake(DOWN)
-        32 -> FollowBallHorizontally()
-        33 -> FollowClearBall()
-        34 -> RecoverAndShoot()
-        35 -> FollowRecoverCrossShot(UP)
-        36 -> FollowRecoverCrossShot(CENTER)
-        37 -> FollowRecoverCrossShot(DOWN)
-        38 -> RecoverCrossShot(UP)
-        39 -> RecoverCrossShot(CENTER)
-        40 -> RecoverCrossShot(DOWN)
-        41 -> FollowCrossClearBall()
-        42 -> CampInOpponentSurface()
-        43 -> ForwardStriker(UP)
-        44 -> ForwardStriker(CENTER)
-        45 -> ForwardStriker(DOWN)
+        24 -> Overtake(UP)
+        25 -> Overtake(DOWN)
+        26 -> FollowBallHorizontally()
+        27 -> FollowClearBall()
+        28 -> RecoverCrossShootDistanceFromBall()
+        29 -> FollowRecoverCrossShot(UP)
+        30 -> FollowRecoverCrossShot(CENTER)
+        31 -> FollowRecoverCrossShot(DOWN)
+        32 -> RecoverCrossShootQuarters(UP)
+        33 -> RecoverCrossShootQuarters(CENTER)
+        34 -> RecoverCrossShootQuarters(DOWN)
+        35 -> FollowCrossClearBall()
+        36 -> CampInOpponentSurface()
+        37 -> ForwardStriker(UP)
+        38 -> ForwardStriker(CENTER)
+        39 -> ForwardStriker(DOWN)
+        40 -> OutingGoalKeeper()
 
         else -> {
             DoesNothing(randomSideInTeam)
@@ -103,17 +97,16 @@ fun createStrategyByNumberAndRandomSide(strategyNumber: Int): PlayerStrategy {
         7 -> CrossShot(randomSideInTeam)
         8 -> RunZigZag(randomSideInTeam)
         9 -> StayAtShootDistanceOfTheBall()
-        10 -> RunStraightAndCrossShot(randomSideInTeam)
-        11 -> ZigZagAndCrossShot(randomSideInTeam)
-        12 -> Overtake(randomSideInTeam)
-        13 -> FollowBallHorizontally()
-        14 -> FollowClearBall()
-        15 -> RecoverAndShoot()
-        16 -> FollowRecoverCrossShot(randomSideInTeam)
-        17 -> RecoverCrossShot(randomSideInTeam)
-        18 -> FollowCrossClearBall()
-        19 -> CampInOpponentSurface()
-        20 -> ForwardStriker(randomSideInTeam)
+        10 -> Overtake(randomSideInTeam)
+        11 -> FollowBallHorizontally()
+        12 -> FollowClearBall()
+        13 -> RecoverCrossShootDistanceFromBall()
+        14 -> FollowRecoverCrossShot(randomSideInTeam)
+        15 -> RecoverCrossShootQuarters(randomSideInTeam)
+        16 -> FollowCrossClearBall()
+        17 -> CampInOpponentSurface()
+        18 -> ForwardStriker(randomSideInTeam)
+        19 -> OutingGoalKeeper()
 
         else -> {
             DoesNothing(randomSideInTeam)
@@ -133,17 +126,16 @@ fun createStrategyByNumberAndSide(strategyNumber: Int, side: SideInTeam): Player
         7 -> CrossShot(side)
         8 -> RunZigZag(side)
         9 -> StayAtShootDistanceOfTheBall()
-        10 -> RunStraightAndCrossShot(side)
-        11 -> ZigZagAndCrossShot(side)
-        12 -> Overtake(side)
-        13 -> FollowBallHorizontally()
-        14 -> FollowClearBall()
-        15 -> RecoverAndShoot()
-        16 -> FollowRecoverCrossShot(side)
-        17 -> RecoverCrossShot(side)
-        18 -> FollowCrossClearBall()
-        19 -> CampInOpponentSurface()
-        20 -> ForwardStriker(side)
+        10 -> Overtake(side)
+        11 -> FollowBallHorizontally()
+        12 -> FollowClearBall()
+        13 -> RecoverCrossShootDistanceFromBall()
+        14 -> FollowRecoverCrossShot(side)
+        15 -> RecoverCrossShootQuarters(side)
+        16 -> FollowCrossClearBall()
+        17 -> CampInOpponentSurface()
+        18 -> ForwardStriker(side)
+        19 -> OutingGoalKeeper()
 
         else -> {
             DoesNothing(side)

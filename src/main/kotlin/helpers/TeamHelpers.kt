@@ -8,7 +8,7 @@ import football.player.strategy.combined.distanceFromBall.RandomCombinedDistance
 import football.player.strategy.combined.quarters.RandomQuartersStrategy
 import football.player.strategy.simple.DoesNothing
 import football.player.strategy.simple.attack.dumbRushers.DumbRusherRun
-import football.player.strategy.simple.defense.FixedGoalKeeper
+import football.player.strategy.simple.defense.goal.FixedGoalKeeper
 import javafx.scene.paint.Color
 import java.util.*
 

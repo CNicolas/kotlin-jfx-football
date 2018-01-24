@@ -1,4 +1,4 @@
-package football.player.strategy
+package football.player.strategy.simple.attack
 
 import football.Ball
 import football.FieldContext
@@ -8,6 +8,7 @@ import football.game.GameSide.HOME
 import football.player.Player
 import football.player.ShootingStrength
 import football.player.SideInTeam.*
+import football.player.strategy.AbstractPlayerStrategy
 import helpers.Coordinates
 import helpers.distance
 

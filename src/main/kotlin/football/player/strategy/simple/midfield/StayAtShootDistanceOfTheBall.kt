@@ -8,7 +8,7 @@ import football.game.GameSide.HOME
 import football.player.Player
 import football.player.ShootingStrength
 import football.player.SideInTeam
-import football.player.strategy.DefenderStrategy
+import football.player.strategy.simple.defense.DefenderStrategy
 import helpers.Coordinates
 import helpers.getMaxCoordinates
 

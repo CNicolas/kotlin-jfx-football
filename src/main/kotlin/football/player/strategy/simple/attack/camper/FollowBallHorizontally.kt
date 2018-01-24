@@ -4,7 +4,7 @@ import football.Ball
 import football.player.Player
 import football.player.ShootingStrength
 import football.player.SideInTeam
-import football.player.strategy.AttackStrategy
+import football.player.strategy.simple.attack.AttackStrategy
 import helpers.Coordinates
 import helpers.distance
 

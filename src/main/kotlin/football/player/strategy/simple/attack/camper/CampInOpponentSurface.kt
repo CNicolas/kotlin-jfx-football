@@ -6,7 +6,7 @@ import football.game.GameSide
 import football.player.Player
 import football.player.ShootingStrength
 import football.player.SideInTeam
-import football.player.strategy.AttackStrategy
+import football.player.strategy.simple.attack.AttackStrategy
 import helpers.Coordinates
 
 class CampInOpponentSurface : AttackStrategy() {

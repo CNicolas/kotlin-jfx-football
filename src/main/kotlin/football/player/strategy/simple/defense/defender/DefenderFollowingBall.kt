@@ -1,11 +1,11 @@
-package football.player.strategy.simple.defense
+package football.player.strategy.simple.defense.defender
 
 import football.Ball
 import football.FieldContext
 import football.player.Player
 import football.player.ShootingStrength
 import football.player.SideInTeam
-import football.player.strategy.DefenderStrategy
+import football.player.strategy.simple.defense.DefenderStrategy
 import helpers.Coordinates
 
 class DefenderFollowingBall(distanceFromGoal: Double = FieldContext.fieldTotalWidth / 5) : DefenderStrategy(distanceFromGoal) {

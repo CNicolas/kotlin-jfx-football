@@ -1,10 +1,10 @@
-package football.player.strategy.simple.defense
+package football.player.strategy.simple.defense.goal
 
 import football.FieldContext
 import football.player.Player
 import football.player.ShootingStrength
 import football.player.SideInTeam
-import football.player.strategy.DefenderStrategy
+import football.player.strategy.simple.defense.DefenderStrategy
 import helpers.Coordinates
 
 class FixedGoalKeeper(distanceFromGoal: Double = FieldContext.surfaceWidth / 3) : DefenderStrategy(distanceFromGoal) {
