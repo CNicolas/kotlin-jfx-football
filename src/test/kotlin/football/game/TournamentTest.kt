@@ -8,6 +8,7 @@ import javafx.scene.paint.Color
 import main.tournament.Tournament
 import org.assertj.core.api.Assertions.assertThat
 import org.testng.annotations.Test
+import java.io.File
 import java.util.*
 
 class TournamentTest {
@@ -25,6 +26,8 @@ class TournamentTest {
 
         assertThat(leaderBoard.getWinner().score).isEqualTo(6)
         assertThat(leaderBoard.getWinner().team.strategies).isEqualTo(winner.strategies)
+
+        File("tournament-result.txt").printWriter().use { out -> out.println(leaderBoard.toString()) }
     }
 
     @Test(enabled = false)
@@ -40,6 +43,8 @@ class TournamentTest {
         println()
         println("Games played : ${leaderBoard.gamesPlayed}, with ${leaderBoard.leaderBoard.size} teams")
         println("${leaderBoard.getWinner().team.strategies}")
+
+        File("tournament-result.txt").printWriter().use { out -> out.println(leaderBoard.toString()) }
     }
 
     @Test
@@ -117,7 +122,7 @@ class TournamentTest {
         println("${leaderBoard.getWinner().team.strategies}")
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     fun should_play_tournament_with_300_teams_of_4_players() {
         val tournament = Tournament()
         val teams = TeamHelpers.createTeamsOfFourPlayersOnRandomSide()
@@ -130,5 +135,7 @@ class TournamentTest {
         println()
         println("Games played : ${leaderBoard.gamesPlayed}, with ${leaderBoard.leaderBoard.size} teams")
         println("${leaderBoard.getWinner().team.strategies}")
+
+        File("tournament-result.txt").printWriter().use { out -> out.println(leaderBoard.toString()) }
     }
 }
