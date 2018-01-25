@@ -122,12 +122,29 @@ class TournamentTest {
         println("${leaderBoard.getWinner().team.strategies}")
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     fun should_play_tournament_with_300_teams_of_4_players() {
         val tournament = Tournament()
         val teams = TeamHelpers.createTeamsOfFourPlayersOnRandomSide()
         Collections.shuffle(teams)
         val tournamentTeams = teams.subList(0, 300)
+
+        val leaderBoard = tournament.playTournament(tournamentTeams)
+
+        println(leaderBoard)
+        println()
+        println("Games played : ${leaderBoard.gamesPlayed}, with ${leaderBoard.leaderBoard.size} teams")
+        println("${leaderBoard.getWinner().team.strategies}")
+
+        File("tournament-result.txt").printWriter().use { out -> out.println(leaderBoard.toString()) }
+    }
+
+    @Test(enabled = false)
+    fun should_play_tournament_with_1000_teams_of_4_players() {
+        val tournament = Tournament()
+        val teams = TeamHelpers.createTeamsOfFourPlayersOnRandomSide()
+        Collections.shuffle(teams)
+        val tournamentTeams = teams.subList(0, 1000)
 
         val leaderBoard = tournament.playTournament(tournamentTeams)
 
